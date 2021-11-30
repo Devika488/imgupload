@@ -5,16 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignindashComponent } from './signindash/signindash.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaindashComponent } from './maindash/maindash.component';
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
-    SignindashComponent
+    SignindashComponent,
+    MaindashComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

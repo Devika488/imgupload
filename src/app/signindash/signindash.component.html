@@ -1,4 +1,82 @@
-<div class="row h-100">
-    <p>signindash works!</p>
+<!-- sign up form -->
 
+<!--validations and then enable button with ngIf  -->
+
+<div class="row h-100">
+  <div class="container w-50 ms-auto me-auto">
+    <h3>New User Register</h3>
+    <form [formGroup]="userdetails">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+        <div id="emailHelp" class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+      </div>
+      <div
+        class="alert alert-danger mt-4"
+        role="alert"
+        *ngIf="
+          userdetails.controls['email'].touched &&
+          userdetails.controls['email'].invalid
+        "
+      >
+        Please provide valid email!
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+      </div>
+      <div
+        class="alert alert-danger mt-4"
+        role="alert"
+        *ngIf="
+          userdetails.controls['password'].touched &&
+          userdetails.controls['password'].invalid
+        "
+      >
+        Please provide valid password ! 
+        <ul style="list-style-type: none">
+          <li>Contains atleast 8 characters</li>
+          <li>Contains atleast 1 special character</li>
+          <li>Contains atleast 1 uppercase or lowercase character </li>
+          <li>Contains atleast 1 number</li>
+        </ul>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+        <input
+          type="password"
+          formControlName="cpassword"
+          class="form-control"
+          id="exampleInputPassword"
+        />
+      </div>
+      <div class="alert alert-danger" role="alert" *ngIf="
+      !(userdetails.controls['password'].value ===
+      userdetails.controls['cpassword'].value) && userdetails.controls['password'].touched && userdetails.controls['cpassword'].touched
+    ">
+      Passwords are not matching !
+      </div>
+      <button
+        type="submit"
+        routerLink="/login"
+        [disabled]="!userdetails.valid"
+        class="btn btn-primary"
+      >
+        Sign Up
+      </button>
+    </form>
+  </div>
 </div>
