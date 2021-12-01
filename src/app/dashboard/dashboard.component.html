@@ -21,14 +21,14 @@
             >Password</span
           >
           <input
-            type="text"
+            type="password"
             class="form-control"
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-default"
           />
         </div>
         <button type="button" class="btn btn-primary mb-5">Login</button>
-        <div class="alert alert-danger" role="alert">
+        <div *ngIf=false class="alert alert-danger" role="alert">
          Invalid email id or password !
         </div>
       </form>

@@ -7,18 +7,26 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignindashComponent } from './signindash/signindash.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MaindashComponent } from './maindash/maindash.component';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './_helpers/auth.interceptor';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     SignindashComponent,
-    MaindashComponent
+    MaindashComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,ReactiveFormsModule
+    AppRoutingModule,ReactiveFormsModule,HttpClientModule
   ],
-  providers: [],
+  providers: [  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
