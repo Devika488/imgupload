@@ -5,7 +5,7 @@ import { SignindashComponent } from './signindash/signindash.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [{path:'',redirectTo:'login',pathMatch:'full'},{path:"signup",component:SignindashComponent},
-{path:"login",component:DashboardComponent},{path:'user-profile',component:UserProfileComponent}];
+{path:"login",component:DashboardComponent},{path:'user-profile/:email',component:UserProfileComponent}];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

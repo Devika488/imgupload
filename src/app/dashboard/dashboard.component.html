@@ -4,7 +4,7 @@
   <div class="w-100 text-center mt-5">
     <h3>Login Form</h3>
     <div class="form m-auto">
-      <form class="bottom-0">
+      <form class="bottom-0" [formGroup]="signinForm" (ngSubmit)="loginUser()">
         <div class="input-group mb-3 mt-4">
           <span class="input-group-text" id="inputGroup-sizing-default"
             >Email</span
@@ -12,6 +12,7 @@
           <input
             type="text"
             class="form-control"
+            formControlName="email"
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-default"
           />
@@ -23,18 +24,17 @@
           <input
             type="password"
             class="form-control"
+            formControlName="password"
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-default"
           />
         </div>
-        <button type="button" class="btn btn-primary mb-5">Login</button>
-        <div *ngIf=false class="alert alert-danger" role="alert">
-         Invalid email id or password !
+        <button type="submit" class="btn btn-primary mb-5">Login</button>
+        <div *ngIf="false" class="alert alert-danger" role="alert">
+          Invalid email id or password !
         </div>
       </form>
-      <a class="text-center" routerLink="/signup"
-        >Create a new user account</a
-      >
+      <a class="text-center" routerLink="/signup">Create a new user account</a>
     </div>
   </div>
 </div>
