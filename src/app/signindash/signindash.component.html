@@ -76,6 +76,9 @@
       >
         Sign Up
       </button>
+      <div class="alert alert-danger mt-3" role="alert" *ngIf="isSignUpFailed">
+      The email is already in use. Please choose another email address !
+      </div>
     </form>
   </div>
 </div>

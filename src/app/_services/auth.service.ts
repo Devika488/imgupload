@@ -25,7 +25,12 @@ export class AuthService {
     let api = `${this.endpoint}/signup`;
     return this.http.post(api, user)
       .pipe(
+        // map(res=>{
+        //   console.warn("map :"+JSON.stringify(res));
+          
+        //   return res;})
         catchError(this.handleError)
+        
       )
   }
 

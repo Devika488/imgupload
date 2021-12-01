@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup,Validators } from '@angular/forms';
 import { AuthService } from '../_services/auth.service';
 import { user } from './signdash';
 import { Router } from '@angular/router';
+import { JsonpClientBackend } from '@angular/common/http';
 
 @Component({
   selector: 'app-signindash',
@@ -13,9 +14,10 @@ export class SignindashComponent implements OnInit {
 
   userobj:user=new user;
 
-  isSuccessful = false;
-  isSignUpFailed = false;
-  errorMessage = '';
+  // isSuccessful = false;
+  isSignUpFailed:boolean = false;
+  
+  // errorMessage = '';
   constructor(private fb:FormBuilder, private authservice:AuthService,private router:Router) { }
  
   ngOnInit(): void {
@@ -25,6 +27,7 @@ email:['',[Validators.required, Validators.email,Validators.pattern('^[a-z0-9._%
 password:['',[Validators.required,Validators.pattern('(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>"\'\\;:\{\\\}\\\[\\\]\\\|\\\+\\\-\\\=\\\_\\\)\\\(\\\)\\\`\\\/\\\\\\]])[A-Za-z0-9\d$@].{8,}')]],
 cpassword:['']
 });
+
 registerUser() {
   console.warn(this.userdetails.value);
   
@@ -33,13 +36,30 @@ registerUser() {
   console.warn(this.userobj);
   
   this.authservice.signUp(this.userobj).subscribe((res) => {
-    if (res.result) {
-      this.userdetails.reset()
+    if (!res.error) {
+      this.userdetails.reset();
+      this.isSignUpFailed=false;
+      console.warn(this.isSignUpFailed);
+      
       this.router.navigate(['/login']);
     }
-    console.warn("res :"+res);
+    
+    // if(!res)
+    // {
+    //   console.warn("hi");
+      
+    //   this.isSignUpFailed=true;
+    //   console.warn(this.isSignUpFailed);
+      
+    // }
+    console.warn("res :"+JSON.stringify(res));
     
     return res;
+  },err=>{
+    console.warn(err);
+      
+      this.isSignUpFailed=true;
+      console.warn(this.isSignUpFailed);
   })
 }
 } 
