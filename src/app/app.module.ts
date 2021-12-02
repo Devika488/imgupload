@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { SignindashComponent } from './signindash/signindash.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MaindashComponent } from './maindash/maindash.component';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -15,7 +14,6 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     AppComponent,
     DashboardComponent,
     SignindashComponent,
-    MaindashComponent,
     UserProfileComponent
   ],
   imports: [

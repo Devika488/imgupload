@@ -13,6 +13,8 @@ export class AppComponent{
     let authToken = localStorage.getItem('access_token');
     return authToken !== null ? true : false;
   }
+
+  //Log Out -clear token from local storage
   logout(){
     this.auth.doLogout();
   }

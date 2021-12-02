@@ -1,6 +1,18 @@
-
 <div class="row h-100">
-<p>user-profile works!</p>
+  <!-- <p>user-profile works!</p>
 <p> image file upload</p>
-<p>image file view</p>
+<p>image file view</p> -->
+
+  <div class="mb-3 w-50 text-center ms-auto me-auto">
+    <label for="formFile" class="form-label">Image Upload</label>
+    
+      <form [formGroup]="uploadfile">
+        <div class="d-flex">
+        <input class="form-control" formControlName="file" type="file" id="formFile"accept="image/png, image/jpeg,image/jpg,image/gif" />
+        <input class="btn btn-primary ms-3" type="button" value="Upload" (click)="upload()" />
+    </div>
+      </form>
+   
+
+  </div>
 </div>

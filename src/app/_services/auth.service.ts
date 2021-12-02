@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { user } from '../signindash/signdash';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import {
   HttpClient,
   HttpHeaders,
