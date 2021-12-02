@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../src/app/maindash/maindash.component.scss"
+    ],
+    "names": [],
+    "file": "maindash.component.css"
+}

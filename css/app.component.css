@@ -1,0 +1,12 @@
+nav, footer {
+  background-color: #e3f2fd;
+}
+
+footer {
+  position: -webkit-sticky;
+  position: sticky;
+  bottom: 0;
+  overflow: hidden;
+  padding: 20px 0px;
+}
+/*# sourceMappingURL=app.component.css.map */

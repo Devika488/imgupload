@@ -40,10 +40,7 @@ export class AuthService {
     return localStorage.getItem('access_token');
   }
 
-  get isLoggedIn(): boolean {
-    let authToken = localStorage.getItem('access_token');
-    return authToken !== null ? true : false;
-  }
+  
 
   doLogout() {
     let removeToken = localStorage.removeItem('access_token');

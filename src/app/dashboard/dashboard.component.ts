@@ -11,7 +11,7 @@ import { AuthService } from '../_services/auth.service';
 export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService, private fb: FormBuilder,private router:Router) {}
   islogin:boolean=false;
-  hehe: any;
+  getloggin:any=true;
   signinForm: FormGroup = this.fb.group({
     email: ['', Validators.required],
     password: ['', Validators.required],
@@ -26,7 +26,9 @@ export class DashboardComponent implements OnInit {
       console.warn(JSON.stringify(res)); //undefined
       this.authService.currentUser = res;
       console.warn('inside signin ' + res);
-
+      // this.getloggin=false;
+      console.warn("getloggin in child:"+this.getloggin);
+      
       this.router.navigate(['/user-profile/' + this.signinForm.value.email]);
 
       // this.getUserProfile(res).subscribe((res) => {
