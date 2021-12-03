@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
     [
       Validators.required,
       Validators.email,
-      Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-z]{2,4}$'),
+      Validators.pattern('^[a-zA-Z0-9][a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-z]{2,4}$'),
     ]],
     password: ['',[
       Validators.required,
