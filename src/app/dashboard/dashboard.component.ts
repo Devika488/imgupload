@@ -31,11 +31,11 @@ export class DashboardComponent implements OnInit {
     ]],
   });
   ngOnInit(): void {}
-  // ifformfocus(){
-  //   if(this.valueclear||this.valueclearpwd){
+  ifformfocus(){
+    // if(this.valueclear||this.valueclearpwd){
 
-  //   }
-  // }
+    // }
+  }
   // input
   iffocus(){
     this.valueclear= (this.signinForm.value.email==''?false:true);
@@ -47,6 +47,8 @@ export class DashboardComponent implements OnInit {
       this.valueclearpwd= (this.signinForm.value.password==''?false:true);
       console.warn(this.valueclearpwd);
      }
+
+
   loginUser() {
     console.warn(this.signinForm.value);
     this.authService.signIn(this.signinForm.value)  .subscribe((res: any) => {
@@ -60,14 +62,22 @@ export class DashboardComponent implements OnInit {
       console.warn("getloggin in child:"+this.getloggin);
       
       this.router.navigate(['/user-profile/' + this.signinForm.value.email]);
+      // this.valuefocus=true;
 
       // this.getUserProfile(res).subscribe((res) => {
       // })
     
     },err=>{
       console.warn(err);
+
       this.islogin=true;
-      
+
+      setInterval(()=>{this.islogin=false;
+        console.warn(this.islogin);
+        
+      },3000);
+      // this.valuefocus=false;
+ 
     }
     );
   }
