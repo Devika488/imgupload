@@ -14,13 +14,14 @@ export class DashboardComponent implements OnInit {
   getloggin:any=true;
   valueclear:boolean=false;
   valueclearpwd:boolean=false;
+  valuefocus:boolean=false;
 
   signinForm: FormGroup = this.fb.group({
     email: ['',
     [
       Validators.required,
       Validators.email,
-      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+      Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-z]{2,4}$'),
     ]],
     password: ['',[
       Validators.required,
@@ -30,11 +31,18 @@ export class DashboardComponent implements OnInit {
     ]],
   });
   ngOnInit(): void {}
+  // ifformfocus(){
+  //   if(this.valueclear||this.valueclearpwd){
+
+  //   }
+  // }
+  // input
   iffocus(){
     this.valueclear= (this.signinForm.value.email==''?false:true);
     console.warn(this.valueclear);
     
    }
+  //  pwd
      iffocuspwd(){
       this.valueclearpwd= (this.signinForm.value.password==''?false:true);
       console.warn(this.valueclearpwd);

@@ -2,8 +2,8 @@
 
 <!--validations and then enable button with ngIf  -->
 
-<div class="row h-100">
-  <div class="container w-50 ms-auto me-auto">
+<div class=" h-100">
+  <div class="w-50 ms-auto me-auto">
     <h3>New User Register</h3>
     <form [formGroup]="userdetails" (ngSubmit)="registerUser()">
       <div class="mb-3">
@@ -53,6 +53,7 @@
         Please provide valid password ! 
         <ul style="list-style-type: none">
           <li>Contains atleast 8 characters</li>
+          <li>Contains first letter should not be special character </li>
           <li>Contains atleast 1 special character</li>
           <li>Contains atleast 1 uppercase or lowercase character </li>
           <li>Contains atleast 1 number</li>
@@ -71,7 +72,7 @@
       </div>
       <div class="alert alert-danger" role="alert" *ngIf="
       (userdetails.controls['password'].value !==
-      userdetails.controls['cpassword'].value) && userdetails.controls['cpassword'].touched && passwordne
+      userdetails.controls['cpassword'].value) && userdetails.controls['cpassword'].touched && valueclearpwd
     ">
       Passwords are not matching !
       </div>
