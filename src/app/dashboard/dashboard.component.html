@@ -13,10 +13,24 @@
             type="text"
             class="form-control"
             formControlName="email"
+            (focus)='iffocus()'
+            (blur)='iffocus()'
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-default"
           />
+         
         </div>
+        <div
+        class="alert alert-danger mt-4"
+        role="alert"
+        *ngIf="
+          (signinForm.controls['email'].touched &&
+          signinForm.controls['email'].invalid)&&(valueclear) 
+        "
+      
+        >
+        Please provide valid email!
+      </div>
         <div class="input-group mb-3 mt-2">
           <span class="input-group-text" id="inputGroup-sizing-default"
             >Password</span
@@ -25,10 +39,23 @@
             type="password"
             class="form-control"
             formControlName="password"
+            (focus)='iffocuspwd()'
+          (blur)='iffocuspwd()'
             aria-label="Sizing example input"
             aria-describedby="inputGroup-sizing-default"
           />
         </div>
+        <div
+        class="alert alert-danger mt-4"
+        role="alert"
+        *ngIf="
+          signinForm.controls['password'].touched &&
+          signinForm.controls['password'].invalid && valueclearpwd
+        "
+      >
+        Please provide valid password ! 
+        
+      </div>
         <button type="submit" class="btn btn-primary mb-5">Login</button>
         <div *ngIf="islogin" class="alert alert-danger" role="alert">
           Invalid email id or password !

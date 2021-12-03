@@ -12,11 +12,33 @@ export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService, private fb: FormBuilder,private router:Router) {}
   islogin:boolean=false;
   getloggin:any=true;
+  valueclear:boolean=false;
+  valueclearpwd:boolean=false;
+
   signinForm: FormGroup = this.fb.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required],
+    email: ['',
+    [
+      Validators.required,
+      Validators.email,
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+    ]],
+    password: ['',[
+      Validators.required,
+      Validators.pattern(
+        '(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!#^~%*?&,.<>"\'\\;:{\\}\\[\\]\\|\\+\\-\\=\\_\\)\\(\\)\\`\\/\\\\\\]])[A-Za-z0-9d$@].{8,}'
+      ),
+    ]],
   });
   ngOnInit(): void {}
+  iffocus(){
+    this.valueclear= (this.signinForm.value.email==''?false:true);
+    console.warn(this.valueclear);
+    
+   }
+     iffocuspwd(){
+      this.valueclearpwd= (this.signinForm.value.password==''?false:true);
+      console.warn(this.valueclearpwd);
+     }
   loginUser() {
     console.warn(this.signinForm.value);
     this.authService.signIn(this.signinForm.value)  .subscribe((res: any) => {

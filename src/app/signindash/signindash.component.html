@@ -12,6 +12,8 @@
           type="email"
           formControlName="email"
           class="form-control"
+          (focus)='iffocus()'
+          (blur)='iffocus()'
           id="exampleInputEmail1"
           aria-describedby="emailHelp"
         />
@@ -23,8 +25,8 @@
         class="alert alert-danger mt-4"
         role="alert"
         *ngIf="
-          userdetails.controls['email'].touched &&
-          userdetails.controls['email'].invalid
+          (userdetails.controls['email'].touched &&
+          userdetails.controls['email'].invalid)&&(valueclear)
         "
       >
         Please provide valid email!
@@ -34,6 +36,8 @@
         <input
           type="password"
           formControlName="password"
+          (focus)='iffocuspwd()'
+          (blur)='iffocuspwd()'
           class="form-control"
           id="exampleInputPassword1"
         />
@@ -43,7 +47,7 @@
         role="alert"
         *ngIf="
           userdetails.controls['password'].touched &&
-          userdetails.controls['password'].invalid
+          userdetails.controls['password'].invalid&&valueclearpwd
         "
       >
         Please provide valid password ! 
@@ -58,14 +62,16 @@
         <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
         <input
           type="password"
+          (focus)='ifpwdnot()'
+          (blur)='ifpwdnot()'
           formControlName="cpassword"
           class="form-control"
           id="exampleInputPassword"
         />
       </div>
       <div class="alert alert-danger" role="alert" *ngIf="
-      !(userdetails.controls['password'].value ===
-      userdetails.controls['cpassword'].value) && userdetails.controls['password'].touched && userdetails.controls['cpassword'].touched
+      (userdetails.controls['password'].value !==
+      userdetails.controls['cpassword'].value) && userdetails.controls['cpassword'].touched && passwordne
     ">
       Passwords are not matching !
       </div>

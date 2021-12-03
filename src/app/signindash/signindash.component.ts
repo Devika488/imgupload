@@ -14,7 +14,9 @@ export class SignindashComponent implements OnInit {
 
   // isSuccessful = false;
   isSignUpFailed: boolean = false;
-
+  valueclear:boolean=false;
+  valueclearpwd:boolean=false;
+  passwordne:boolean=false;
   // errorMessage = '';
   constructor(
     private fb: FormBuilder,
@@ -23,6 +25,7 @@ export class SignindashComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+  
   userdetails: FormGroup = this.fb.group({
     email: [
       '',
@@ -44,6 +47,19 @@ export class SignindashComponent implements OnInit {
     cpassword: [''],
   });
 
+iffocus(){
+ this.valueclear= (this.userdetails.value.email==''?false:true);
+ console.warn(this.valueclear);
+ 
+}
+iffocuspwd(){
+  this.valueclearpwd= (this.userdetails.value.password==''?false:true);
+  console.warn(this.valueclearpwd);
+}
+  ifpwdnot(){
+    this.passwordne= (this.userdetails.value.cpassword==''?false:true);
+    console.warn(this.passwordne);
+  }
   registerUser() {
     console.warn(this.userdetails.value);
 
