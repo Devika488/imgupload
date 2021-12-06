@@ -8,11 +8,10 @@ import { AuthService } from './_services/auth.service';
 export class AppComponent{
   title = 'imgupload';
   constructor(private auth:AuthService){}
-// content need in authservice but can't do validation so use it here:-is login 
-  isLoggedIn(): boolean {
-    let authToken = localStorage.getItem('access_token');
-    return authToken !== null ? true : false;
-  }
+// access token in localstorage checking
+isLoggedIn(){
+  return this.auth.isLoggedIn();
+}
 
   //Log Out -clear token from local storage
   logout(){

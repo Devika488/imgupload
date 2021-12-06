@@ -35,6 +35,14 @@ export class AuthService {
     return this.http.post<any>(`${this.endpoint}/signin`, user);
   }
 
+
+// get login
+isLoggedIn(): boolean {
+  let authToken = localStorage.getItem('access_token');
+  return authToken !== null ? true : false;
+}
+
+
   //get token :-Authorization :  { token }
   getToken() {
     return localStorage.getItem('access_token');
