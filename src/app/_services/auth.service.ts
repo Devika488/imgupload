@@ -48,6 +48,7 @@ isLoggedIn(): boolean {
     return localStorage.getItem('access_token');
   }
 
+  // check access token expire
   
 
   doLogout() {
