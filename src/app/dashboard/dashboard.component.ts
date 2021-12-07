@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit {
       setInterval(()=>{this.islogin=false;
         console.warn(this.islogin);
         
-      },3000);
+      },10000);
       // this.valuefocus=false;
  
     }

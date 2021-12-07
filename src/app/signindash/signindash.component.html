@@ -2,10 +2,16 @@
 
 <!--validations and then enable button with ngIf  -->
 
-<div class=" h-100">
-  <div class="w-50 ms-auto me-auto">
-    <h3>New User Register</h3>
+
+
+
+
+
+<div class=" h-100 ">
+  <div class="w-50 ms-auto me-auto main ">
+   <div class="w-100 p-4 m-auto"> <h3 class="text-center pb-2">New User Register</h3>
     <form [formGroup]="userdetails" (ngSubmit)="registerUser()">
+     <div class="w-100 m-auto pb-4">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
         <input
@@ -79,13 +85,14 @@
       <button
         type="submit"
         [disabled]="!userdetails.valid"
-        class="btn btn-primary"
+        class="button-43 btn "
       >
         Sign Up
       </button>
       <div class="alert alert-danger mt-3" role="alert" *ngIf="isSignUpFailed">
       The email is already in use. Please choose another email address !
       </div>
-    </form>
+     </div>
+    </form></div>
   </div>
 </div>

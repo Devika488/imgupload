@@ -1,11 +1,11 @@
 <!--  login form  -->
 <!-- validation login- invalid details-->
 <div class="row m-auto mt-5 h-100">
-  <div class="w-100 text-center mt-5">
+  <div class="m-auto text-center mt-5 main p-5">
     <h3>Login Form</h3>
-    <div class="form m-auto">
-      <form class="bottom-0" [formGroup]="signinForm" (ngSubmit)="loginUser()">
-        <div class="input-group mb-3 mt-4">
+    <div class="form m-auto w-100 ">
+      <form class="bottom-0" [formGroup]="signinForm" (ngSubmit)="loginUser()" >
+        <div class="input-group mb-3 mt-4 ">
           <span class="input-group-text" id="inputGroup-sizing-default"
             >Email</span
           >
@@ -56,7 +56,7 @@
         Please provide valid password ! 
         
       </div>
-        <button type="submit" class="btn btn-primary mb-5">Login</button>
+        <button type="submit" class="m-auto btn button-43 mb-5">Login</button>
         <div *ngIf="(valueclear || valueclearpwd) &&  islogin" class="alert alert-danger" role="alert">
           Invalid email id or password !
         </div>
