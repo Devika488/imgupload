@@ -11,11 +11,11 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean {
       if(this.auth.isLoggedIn()){
-        console.warn("login authn guard");
+        console.warn("login auth guard");
         
         return true;
       }
-      console.warn("can't login authn guard");
+      console.warn("can't login auth guard");
       window.alert('You don\'t have permission to view this page');
       this.router.navigateByUrl('login')
       return false;

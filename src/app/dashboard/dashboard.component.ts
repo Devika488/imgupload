@@ -14,7 +14,7 @@ export class DashboardComponent implements OnInit {
   getloggin:any=true;
   valueclear:boolean=false;
   valueclearpwd:boolean=false;
-  valuefocus:boolean=false;
+  // valuefocus:boolean=false;
 
   signinForm: FormGroup = this.fb.group({
     email: ['',
@@ -57,18 +57,13 @@ export class DashboardComponent implements OnInit {
     this.authService.signIn(this.signinForm.value)  .subscribe((res: any) => {
       localStorage.setItem('access_token', res.token);
       this.islogin=false;
-      // console.warn("res :"+res);
       console.warn(JSON.stringify(res)); //undefined
       this.authService.currentUser = res;
       console.warn('inside signin ' + res);
-      // this.getloggin=false;
       console.warn("getloggin in child:"+this.getloggin);
       
       this.router.navigate(['/user-profile/' + this.signinForm.value.email]);
-      // this.valuefocus=true;
-
-      // this.getUserProfile(res).subscribe((res) => {
-      // })
+ 
     
     },err=>{
       console.warn(err);
@@ -79,7 +74,6 @@ export class DashboardComponent implements OnInit {
         console.warn(this.islogin);
         
       },10000);
-      // this.valuefocus=false;
  
     }
     );
