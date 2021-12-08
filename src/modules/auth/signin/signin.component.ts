@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../_services/auth.service';
+import { AuthService } from 'src/shared/_services/auth.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+  selector: 'app-signin',
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class SigninComponent implements OnInit {
   constructor(private authService: AuthService, private fb: FormBuilder,private router:Router) {}
   islogin:boolean=false;
   getloggin:any=true;
@@ -61,7 +61,7 @@ export class DashboardComponent implements OnInit {
       // this.getloggin=false;
       console.warn("getloggin in child:"+this.getloggin);
       
-      this.router.navigate(['/user-profile/' + this.signinForm.value.email]);
+      this.router.navigate(['user-profile/' + this.signinForm.value.email]);
       // this.valuefocus=true;
 
       // this.getUserProfile(res).subscribe((res) => {

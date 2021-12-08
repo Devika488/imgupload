@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../_services/user.service';
+import { UserService } from 'src/shared/_services/user.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -58,5 +58,4 @@ this.form.append("image",this.filename);
    }
     
   }
-
 }

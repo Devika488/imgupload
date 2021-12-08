@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { user } from '../signindash/signdash';
+import { user } from 'src/modules/auth/signup/signup';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {
@@ -49,7 +49,7 @@ isLoggedIn(): boolean {
   }
 
   // check access token expire
-  
+
 
   doLogout() {
     let removeToken = localStorage.removeItem('access_token');

@@ -3,22 +3,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { SignindashComponent } from './signindash/signindash.component';
-import { ReactiveFormsModule } from '@angular/forms';
+// import { DashboardComponent } from './dashboard/dashboard.component';
+// import { SignindashComponent } from './signindash/signindash.component';
+// import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './_helpers/auth.interceptor';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { AuthInterceptor } from 'src/shared/_helpers/auth.interceptor';
+// import { UserProfileComponent } from './user-profile/user-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    SignindashComponent,
-    UserProfileComponent
+    // DashboardComponent,
+    // SignindashComponent,
+    // UserProfileComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,ReactiveFormsModule,HttpClientModule
+    AppRoutingModule,HttpClientModule
   ],
   providers: [  {
     provide: HTTP_INTERCEPTORS,

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../_services/auth.service';
-import { user } from './signdash';
+import { AuthService } from 'src/shared/_services/auth.service';
+import { user } from './signup';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-signindash',
-  templateUrl: './signindash.component.html',
-  styleUrls: ['./signindash.component.scss'],
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class SignindashComponent implements OnInit {
+export class SignupComponent implements OnInit {
   userobj: user = new user();
 
   // isSuccessful = false;
@@ -97,4 +97,5 @@ iffocuspwd(){
       }
     );
   }
+
 }
