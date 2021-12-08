@@ -5,11 +5,24 @@ import { RouterModule, Routes } from '@angular/router';
 // import { UserProfileComponent } from './user-profile/user-profile.component';
 import { AuthGuard } from 'src/shared/_services/auth.guard';
 
-const routes: Routes = [{path:"",loadChildren: () => import('../modules/auth/auth.module').then(m => m.AuthModule)},
-{path:'user-profile',loadChildren: () => import('../modules/component/component.module').then(m => m.ComponentModule)}];
+const routes: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('../modules/auth/auth.module').then((m) => m.AuthModule),
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('../modules/component/component.module').then(
+        (m) => m.ComponentModule
+      ),
+    // canActivate: [AuthGuard],
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

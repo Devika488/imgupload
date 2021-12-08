@@ -61,7 +61,8 @@ export class SigninComponent implements OnInit {
       // this.getloggin=false;
       console.warn("getloggin in child:"+this.getloggin);
       
-      this.router.navigate(['user-profile/' + this.signinForm.value.email]);
+      this.router.navigate(['/user-profile']);
+      // /' + this.signinForm.value.email
       // this.valuefocus=true;
 
       // this.getUserProfile(res).subscribe((res) => {
