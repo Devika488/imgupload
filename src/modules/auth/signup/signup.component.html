@@ -7,11 +7,12 @@
 
 
 
-<div class="  mt-5 mb-5">
-    <div class="w-50 ms-auto me-auto main ">
-     <div class="w-100 p-4 m-auto"> <h3 class="text-center pb-2">New User Register</h3>
-      <form [formGroup]="userdetails" (ngSubmit)="registerUser()">
-       <div class="w-100 m-auto pb-4">
+<div class="bg ">
+    <div class="w-25 ms-auto  me-auto ">
+     <div class="w-100  p-4 ms-auto  me-auto "> 
+      <form [formGroup]="userdetails" (ngSubmit)="registerUser()" class=" bg-light p-3 mt-3 main">
+        <h3 class="text-center pb-2">New User Register</h3>
+       <div class="w-100 m-auto pb-4 ">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Email address</label>
           <input

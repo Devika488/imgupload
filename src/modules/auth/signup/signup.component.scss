@@ -1,4 +1,12 @@
+.bg{
+  background-image: url('../../../assets/bg.jpg');
+  background-repeat: no-repeat;
+  background-size:cover ;
+  // position: absolute;
+  width: 100%;
+  height: 89vh;
 
+}
 .button-43 {
     background-image: linear-gradient(-180deg, #37AEE2 0%, #1E96C8 100%);
     border-radius: .5rem;
