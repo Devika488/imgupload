@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/shared/_services/user.service';
+import { browserRefresh } from 'src/app/app.component';
+import { AuthService } from 'src/shared/_services/auth.service'; 
 
 @Component({
   selector: 'app-user-profile',
@@ -9,13 +11,20 @@ import { UserService } from 'src/shared/_services/user.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private fb:FormBuilder,private user:UserService) { }
+  constructor(private fb:FormBuilder,private user:UserService,private auth:AuthService) { }
    form=new FormData;
    reportProgress: boolean=false;
    uploadfail:boolean=false;
    uploadProgress:number=0;
    progressInfo:string='';
+   browserRefresh: boolean = false;
+
   ngOnInit(): void {
+    this.browserRefresh = browserRefresh;
+    console.log('refreshed?:', this.browserRefresh);
+    if (this.browserRefresh) {
+      this.auth.doLogout();
+    }
   }
   filename:any='';
   uploadfile:FormGroup=this.fb.group({
