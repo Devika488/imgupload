@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/shared/_services/auth.service';
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-signin',
@@ -14,8 +15,7 @@ export class SigninComponent implements OnInit {
   getloggin:any=true;
   valueclear:boolean=false;
   valueclearpwd:boolean=false;
-  valuefocus:boolean=false;
-
+  mobile:boolean=true;
   signinForm: FormGroup = this.fb.group({
     email: ['',
     [
@@ -30,11 +30,22 @@ export class SigninComponent implements OnInit {
       ),
     ]],
   });
-  ngOnInit(): void {}
-  ifformfocus(){
-    // if(this.valueclear||this.valueclearpwd){
+  ngOnInit(): void {
+  
+  
+  }
 
-    // }
+  @HostListener("window:resize", [])
+  onResize() {
+    var width = window.innerWidth;
+    this.mobile = width < 992?false:true;
+    console.warn(this.mobile);
+
+    return this.mobile;
+    
+  }
+  ifformfocus(){
+   
   }
   // input
   iffocus(){
@@ -62,11 +73,9 @@ export class SigninComponent implements OnInit {
       console.warn("getloggin in child:"+this.getloggin);
       
       this.router.navigate(['/user-profile']);
-      // /' + this.signinForm.value.email
-      // this.valuefocus=true;
+      
 
-      // this.getUserProfile(res).subscribe((res) => {
-      // })
+     
     
     },err=>{
       console.warn(err);
@@ -77,7 +86,6 @@ export class SigninComponent implements OnInit {
         console.warn(this.islogin);
         
       },10000);
-      // this.valuefocus=false;
  
     }
     );

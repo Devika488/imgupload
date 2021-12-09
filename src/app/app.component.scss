@@ -1,8 +1,9 @@
-$primary:rgb(170, 225, 241);
-
+$primary:rgb(29, 8, 77);
+$color:white;
 
 nav,footer{
     background-color: $primary;
+    color: $color;
 }
 footer{
     position:fixed;

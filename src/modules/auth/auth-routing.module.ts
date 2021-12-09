@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { SigninComponent } from './signin/signin.component';
 import { SignupComponent } from './signup/signup.component';
 
-const routes: Routes = [{path:'',redirectTo:'login',pathMatch:'full'},{path:"signup",component:SignupComponent},
-{path:"login",component:SigninComponent}];
+const routes: Routes = [
+  { path: 'signup', component: SignupComponent },
+  { path: 'login', component: SigninComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {}
