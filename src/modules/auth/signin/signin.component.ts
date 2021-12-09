@@ -63,7 +63,7 @@ export class SigninComponent implements OnInit {
   loginUser() {
     console.warn(this.signinForm.value);
     this.authService.signIn(this.signinForm.value)  .subscribe((res: any) => {
-      localStorage.setItem('access_token', res.token);
+      sessionStorage.setItem('access_token', res.token);
       this.islogin=false;
       // console.warn("res :"+res);
       console.warn(JSON.stringify(res)); //undefined
