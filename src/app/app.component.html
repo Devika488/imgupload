@@ -3,13 +3,13 @@
   <!-- <h3>Image Uploader</h3> -->
   <img src="../assets/clipart1283011.png" alt="logo" height="50" class="ms-2">
   <div class="navbar-nav d-flex flex-row" *ngIf='!isLoggedIn()'>
-    <a class="nav-link p-3 text-white"  routerLink="home"
+    <a class="nav-link p-3 "  routerLink="home"
       >Home</a
     >
-    <a class="nav-link p-3 text-white" routerLink="login"
+    <a class="nav-link p-3 " routerLink="login"
       >Login</a
     >
-    <a class="nav-link p-3 text-white" routerLink="/signup">Sign Up</a>
+    <a class="nav-link p-3 " routerLink="/signup">Sign Up</a>
   </div>
   <input class="btn button-43 me-2" type="button" value="Logout" *ngIf="isLoggedIn()" (click)="logout()">
 
