@@ -36,8 +36,8 @@ export class UserProfileComponent implements OnInit {
     // const read= new FileReader;
    const file:File=event.target.files[0];
     if(file){
-//       console.warn(file);
-// console.warn(file.name);
+      console.warn(file);
+console.warn(file.name);
 
 this.filename=file.name;
 this.form.append("image",this.filename);
