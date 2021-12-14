@@ -1,14 +1,15 @@
-<div class="row ">
+<div class=" ">
   <!-- <p>user-profile works!</p>
 <p> image file upload</p>
 <p>image file view</p> -->
 
-  <div class="mb-3 w-50 text-center ms-auto mt-5 me-auto">
+  <div class="mb-3 w-50 text-center col-md-12 ms-auto mt-5 me-auto">
+    <div class="img"><img [src]="imgSrc" width="300px" (click)='fileclick.click()'></div>
     <label for="formFile" class="form-label">Image Upload</label>
     
       <form [formGroup]="uploadfile">
         <div class="d-flex">
-        <input class="form-control" formControlName="file" type="file" id="file"accept="image/png, image/jpeg,image/jpg,image/gif"  (change)="onImageChange($event)"/>
+        <input class="form-control" formControlName="file" type="file" #fileclick  accept="image/png, image/jpeg,image/jpg,image/gif"  (change)="onImageChange($event)"/>
         <input class="btn btn-primary ms-3" type="button" value="Upload" (click)="upload()" />
     </div>
 

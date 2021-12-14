@@ -1,8 +1,8 @@
 <nav class="navbar navbar-light ">
   <!-- Navbar content-->
   <!-- <h3>Image Uploader</h3> -->
-  <img src="../assets/clipart1283011.png" alt="logo" height="50" class="ms-2">
-  <div class="navbar-nav d-flex flex-row" *ngIf='!isLoggedIn()'>
+  <a routerLink="home"><img src="../assets/clipart1283011.png" alt="logo" height="50" class="ms-2"></a>
+  <div class="navbar-nav d-flex flex-row me-2" *ngIf='!isLoggedIn()'>
     <a class="nav-link p-3 "  routerLink="home"
       >Home</a
     >
@@ -11,7 +11,8 @@
     >
     <a class="nav-link p-3 " routerLink="/signup">Sign Up</a>
   </div>
-  <input class="btn button-43 me-2" type="button" value="Logout" *ngIf="isLoggedIn()" (click)="logout()">
+  <!-- <input class="btn button-43 me-2" type="button" value="LogOut" *ngIf="isLoggedIn()" (click)="logout()"> -->
+  <a class="button-43 btn me-2" *ngIf="isLoggedIn()" (click)="logout()">Logout</a>
 
 </nav>
 <!-- component content -->
