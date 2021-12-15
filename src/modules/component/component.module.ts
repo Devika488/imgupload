@@ -7,10 +7,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { ComponentRoutingModule } from './component-routing.module';
 import { HomeComponent } from './home/home.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 
 @NgModule({
-  declarations: [UserProfileComponent, HomeComponent],
+  declarations: [UserProfileComponent, HomeComponent, GalleryComponent],
   imports: [
     CommonModule,NgbModule,
     ComponentRoutingModule,ReactiveFormsModule

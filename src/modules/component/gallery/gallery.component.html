@@ -1,0 +1,12 @@
+<p>gallery works!</p>
+<table *ngIf="imageList">
+    <tr *ngFor="let i of imageList">
+        <td *ngIf="i!=null">
+            <div class="imagebox w-25"><img [src]="[i]" alt="" class="img-fluid"></div>
+        <!-- </td>
+        <td><div class="imagebox w-25"><img [src]="imageList[3*i+1]" alt="" class="img-fluid"></div>
+        </td>
+        <td><div class="imagebox w-25"><img [src]="imageList[3*i+2]" alt="" class="img-fluid"></div> -->
+        </td>
+    </tr>
+</table>
