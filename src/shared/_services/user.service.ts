@@ -27,12 +27,5 @@ export class UserService {
     this.imagedetailsList.push(imagedetail);
   }
 
-  //  Uploadfile() {
-  //     // return this.http.post<any>(API_URL,data,{
-  //     //     reportProgress: true,
-  //     //     observe: 'events'
-  //     //  } );
-  //   }
-
-  // get
+ 
 }

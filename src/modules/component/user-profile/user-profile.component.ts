@@ -3,8 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/shared/_services/user.service';
 import { browserRefresh } from 'src/app/app.component';
 import { AuthService } from 'src/shared/_services/auth.service';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
+import {
+  AngularFireStorage,
+  AngularFireUploadTask,
+} from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-user-profile',
@@ -20,10 +24,10 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   // form = new FormData();
-
+  progressValue!: AngularFireUploadTask;
   reportProgress: boolean = false;
   uploadfail: boolean = false;
-  uploadProgress: number = 0;
+  uploadProgress!:Observable<number|undefined>;
   progressInfo: string = '';
   browserRefresh: boolean = false;
   imgSrc: String = '../../../assets/imgupload.jpg';
@@ -42,7 +46,7 @@ export class UserProfileComponent implements OnInit {
   filename: any = null;
   uploadfile: FormGroup = this.fb.group({
     imgurl: ['', Validators.required],
-    user: [sessionStorage.getItem('username'), Validators.required],
+    user: ['', Validators.required],
   });
 
   // get file
@@ -54,7 +58,7 @@ export class UserProfileComponent implements OnInit {
       console.warn(file.name);
       this.filename = file.name;
       this.file = file;
-
+     
       // for file preview use filereader ,then we can
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -63,6 +67,9 @@ export class UserProfileComponent implements OnInit {
         this.imgSrc = reader.result as string;
         // console.warn( reader.result as string);
       };
+      this.uploadfile.patchValue({user:sessionStorage.getItem('username')});
+      console.warn(this.uploadfile.value);
+      
     } else {
       this.imgSrc = '../../../assets/imgupload.jpg';
     }
@@ -73,18 +80,18 @@ export class UserProfileComponent implements OnInit {
     if (this.uploadfile.valid) {
       console.warn('file :' + this.file);
       console.warn('formvalue : ' + JSON.stringify(formvalue));
-
-      // this.reportProgress = true;
-      // this.progressInfo = this.filename;
       this.uploadfail = false;
       let filepath = `${sessionStorage.getItem('username')}/${this.filename
         .split('.')
         .slice(0, 1)}_${new Date().getTime()}`;
-      this.imgSrc = '../../../assets/imgupload.jpg';
       const fileref = this.storage.ref(filepath);
 
-      this.storage
-        .upload(filepath, this.file)
+      this.progressValue = this.storage.upload(filepath, this.file); //for getting progress value assigned value to progressValue:AngularFireUploadTask then use that value for snapshotchanges
+      this.reportProgress = true;
+      this.progressInfo = this.filename;
+      this.uploadProgress = this.progressValue.percentageChanges();
+
+      this.progressValue
         .snapshotChanges()
         .pipe(
           finalize(() => {
@@ -92,16 +99,14 @@ export class UserProfileComponent implements OnInit {
               console.warn('url : ' + url);
               formvalue['imgurl'] = url;
               this.user.insertimagedetails(formvalue);
-
-
-
               // <---reset
               this.filename = null;
               this.file = null;
               this.uploadfile.reset();
               this.imgSrc = '../../../assets/imgupload.jpg';
+              
+              this.reportProgress = false;
               // reset--->
-
             });
             console.warn('file ref : ' + this.storage.ref(filepath));
           })
@@ -109,6 +114,14 @@ export class UserProfileComponent implements OnInit {
         .subscribe(
           (res) => {},
           (err) => {
+            // <---reset
+            this.reportProgress = false;
+            this.filename = null;
+            this.file = null;
+            this.uploadfile.reset();
+
+            // reset--->
+
             this.imgSrc = '../../../assets/imgupload.jpg';
             this.uploadfail = true;
             setInterval(() => {
