@@ -53,7 +53,8 @@ isLoggedIn(): boolean {
 
   doLogout() {
     let removeToken = sessionStorage.removeItem('access_token');
-    if (removeToken == null) {
+    let removeuser = sessionStorage.removeItem('username')
+    if (removeToken == null && removeuser== null) {
       this.router.navigate(['/login']);
     }
   }

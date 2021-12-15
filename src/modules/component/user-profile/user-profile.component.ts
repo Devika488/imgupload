@@ -16,12 +16,11 @@ export class UserProfileComponent implements OnInit {
     private fb: FormBuilder,
     private user: UserService,
     private auth: AuthService,
-    private storage: AngularFireStorage,
-  
+    private storage: AngularFireStorage
   ) {}
 
   // form = new FormData();
-  
+
   reportProgress: boolean = false;
   uploadfail: boolean = false;
   uploadProgress: number = 0;
@@ -33,14 +32,17 @@ export class UserProfileComponent implements OnInit {
     this.browserRefresh = browserRefresh;
     console.log('refreshed?:', this.browserRefresh);
     if (this.browserRefresh) {
+      console.warn(sessionStorage.getItem('username'));
+      console.warn(sessionStorage.getItem('access_token'));
+
       this.auth.doLogout();
     }
   }
-  file:any=null;
+  file: any = null;
   filename: any = null;
-  extension:any=null;
   uploadfile: FormGroup = this.fb.group({
-    file: ['', Validators.required],
+    imgurl: ['', Validators.required],
+    user: [sessionStorage.getItem('username'), Validators.required],
   });
 
   // get file
@@ -51,76 +53,71 @@ export class UserProfileComponent implements OnInit {
       console.warn(file);
       console.warn(file.name);
       this.filename = file.name;
-      this.extension=this.filename.split('.')[1];
-      this.file=file;
-  
-      // for file preview use filereader ,then we can 
+      this.file = file;
+
+      // for file preview use filereader ,then we can
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
       reader.onload = () => {
         this.imgSrc = reader.result as string;
-        console.warn( reader.result as string);
-        
+        // console.warn( reader.result as string);
       };
-    // event.target.id.src=URL.createObjectURL(file);   // correct it       
     } else {
       this.imgSrc = '../../../assets/imgupload.jpg';
     }
   }
 
   // file upload
-  upload() {
+  upload(formvalue: any) {
     if (this.uploadfile.valid) {
-      console.warn( "file :"+this.file);
+      console.warn('file :' + this.file);
+      console.warn('formvalue : ' + JSON.stringify(formvalue));
 
       // this.reportProgress = true;
       // this.progressInfo = this.filename;
       this.uploadfail = false;
-      let filepath = `images/${(this.filename.split('.').slice(0,1))}_${new Date().getTime()}.${this.extension}`;
+      let filepath = `${sessionStorage.getItem('username')}/${this.filename
+        .split('.')
+        .slice(0, 1)}_${new Date().getTime()}`;
       this.imgSrc = '../../../assets/imgupload.jpg';
-      const fileref=this.storage.ref(filepath);
-     
+      const fileref = this.storage.ref(filepath);
+
       this.storage
         .upload(filepath, this.file)
         .snapshotChanges()
         .pipe(
-          finalize(()=>{
-            fileref.getDownloadURL().subscribe(url=>{
-              console.warn("url : "+url);
+          finalize(() => {
+            fileref.getDownloadURL().subscribe((url) => {
+              console.warn('url : ' + url);
+              formvalue['imgurl'] = url;
+              this.user.insertimagedetails(formvalue);
 
 
-              // reset
+
+              // <---reset
               this.filename = null;
-              this.file=null;
-              this.extension=null;
-                this.uploadfile.reset();
-                this.imgSrc = '../../../assets/imgupload.jpg';
+              this.file = null;
+              this.uploadfile.reset();
+              this.imgSrc = '../../../assets/imgupload.jpg';
+              // reset--->
 
-
-            })
-            console.warn("file ref : "+this.storage.ref(filepath));
-            
+            });
+            console.warn('file ref : ' + this.storage.ref(filepath));
           })
         )
         .subscribe(
-          // (res) => {
-          //   // this.uploadProgress = Math.round(100 * (loaded / res.total));
-          //   this.filename = '';
-          //   this.uploadfile.reset();
-          //   this.imgSrc = '../../../assets/imgupload.jpg';
-          //   console.warn("res in upload :"+res);
-            
-          // },
-          // (err) => {
-          //   this.uploadfail = true;
-          //   setInterval(() => {
-          //     this.uploadfail = false;
-          //   }, 5000); // an if condition for upload fail message
-          // }
+          (res) => {},
+          (err) => {
+            this.imgSrc = '../../../assets/imgupload.jpg';
+            this.uploadfail = true;
+            setInterval(() => {
+              this.uploadfail = false;
+            }, 5000);
+          }
         );
-   
     } else {
+      this.uploadfile.reset();
       this.imgSrc = '../../../assets/imgupload.jpg';
       this.uploadfail = true;
       setInterval(() => {

@@ -7,10 +7,10 @@
     <div class="img"><img [src]="imgSrc" width="300px" (click)='fileclick.click()'></div>
     <label for="formFile" class="form-label">Image Upload</label>
     
-      <form [formGroup]="uploadfile">
+      <form [formGroup]="uploadfile" (ngSubmit)="upload(uploadfile.value)">
         <div class="d-flex">
-        <input class="form-control" formControlName="file" type="file" #fileclick  accept="image/png, image/jpeg,image/jpg,image/gif"  (change)="onImageChange($event)"/>
-        <input class="btn btn-primary ms-3" type="button" value="Upload" (click)="upload()" />
+        <input class="form-control" formControlName="imgurl" type="file" #fileclick  accept="image/png, image/jpeg,image/jpg,image/gif"  (change)="onImageChange($event)"/>
+        <input class="btn btn-primary ms-3" type="submit" value="Upload"  />
     </div>
 
 
