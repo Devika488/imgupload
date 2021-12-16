@@ -32,7 +32,7 @@ close(){
         console.warn(sessionStorage.getItem('username'));
         console.warn(sessionStorage.getItem('access_token'));
   
-        // this.auth.doLogout();
+        this.auth.doLogout();
       }
     
     this.user.imagedetailsList.snapshotChanges().subscribe((res) => {
