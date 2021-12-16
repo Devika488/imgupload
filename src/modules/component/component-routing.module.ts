@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/shared/_services/auth.guard';
+import { GalleryComponent } from './gallery/gallery.component';
 import { HomeComponent } from './home/home.component';
-import { UserProfileComponent } from './user-profile/user-profile.component';
-
+import { UploadimageComponent } from './uploadimage/uploadimage.component';
 const routes: Routes = [
   {
    path:'',
@@ -15,9 +15,13 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'user-profile',
-    component: UserProfileComponent,
+    path: 'gallery',
+    component: GalleryComponent,
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'upload',
+    component: UploadimageComponent,
   },
 ];
 

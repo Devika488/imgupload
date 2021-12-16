@@ -35,15 +35,17 @@ export class SigninComponent implements OnInit {
   
   }
 
-  @HostListener("window:resize", [])
-  onResize() {
-    var width = window.innerWidth;
-    this.mobile = width < 992?false:true;
-    console.warn(this.mobile);
+  // @HostListener("window:resize", [])
+  // onResize() {
+  //   var width = window.innerWidth;
+  //   this.mobile = width < 992?false:true;
+  //   console.warn(this.mobile);
 
-    return this.mobile;
+  //   return this.mobile;
     
-  }
+  // }
+
+
   ifformfocus(){
    
   }
@@ -73,7 +75,7 @@ export class SigninComponent implements OnInit {
       // this.getloggin=false;
       console.warn("getloggin in child:"+this.getloggin);
       
-      this.router.navigate(['/user-profile']);
+      this.router.navigate(['/gallery']);
       
 
      

@@ -9,18 +9,21 @@ import {
 } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss'],
+  selector: 'app-uploadimage',
+  templateUrl: './uploadimage.component.html',
+  styleUrls: ['./uploadimage.component.scss']
 })
-export class UserProfileComponent implements OnInit {
-  constructor(
+export class UploadimageComponent implements OnInit {
+ constructor(
     private fb: FormBuilder,
     private user: UserService,
     private auth: AuthService,
-    private storage: AngularFireStorage
+    private storage: AngularFireStorage,
+    private router:Router
   ) {}
 
   // form = new FormData();
@@ -30,7 +33,7 @@ export class UserProfileComponent implements OnInit {
   uploadProgress!:Observable<number|undefined>;
   progressInfo: string = '';
   browserRefresh: boolean = false;
-  imgSrc: String = '../../../assets/imgupload.jpg';
+  imgSrc: String = '../../../assets/images/imgupload.jpg';
 
   ngOnInit(): void {
     this.browserRefresh = browserRefresh;
@@ -71,7 +74,7 @@ export class UserProfileComponent implements OnInit {
       console.warn(this.uploadfile.value);
       
     } else {
-      this.imgSrc = '../../../assets/imgupload.jpg';
+      this.imgSrc = '../../../assets/images/imgupload.jpg';
     }
   }
 
@@ -103,9 +106,11 @@ export class UserProfileComponent implements OnInit {
               this.filename = null;
               this.file = null;
               this.uploadfile.reset();
-              this.imgSrc = '../../../assets/imgupload.jpg';
+              this.imgSrc = '../../../assets/images/imgupload.jpg';
               
               this.reportProgress = false;
+              this.router.navigate(['/gallery']);
+
               // reset--->
             });
             console.warn('file ref : ' + this.storage.ref(filepath));
@@ -119,10 +124,9 @@ export class UserProfileComponent implements OnInit {
             this.filename = null;
             this.file = null;
             this.uploadfile.reset();
-
             // reset--->
 
-            this.imgSrc = '../../../assets/imgupload.jpg';
+            this.imgSrc = '../../../assets/images/imgupload.jpg';
             this.uploadfail = true;
             setInterval(() => {
               this.uploadfail = false;
@@ -131,7 +135,7 @@ export class UserProfileComponent implements OnInit {
         );
     } else {
       this.uploadfile.reset();
-      this.imgSrc = '../../../assets/imgupload.jpg';
+      this.imgSrc = '../../../assets/images/imgupload.jpg';
       this.uploadfail = true;
       setInterval(() => {
         this.uploadfail = false;

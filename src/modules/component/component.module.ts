@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { UploadimageComponent } from './uploadimage/uploadimage.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -11,7 +11,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 
 
 @NgModule({
-  declarations: [UserProfileComponent, HomeComponent, GalleryComponent],
+  declarations: [UploadimageComponent, HomeComponent, GalleryComponent],
   imports: [
     CommonModule,NgbModule,
     ComponentRoutingModule,ReactiveFormsModule

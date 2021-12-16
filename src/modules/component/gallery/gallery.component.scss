@@ -1,0 +1,93 @@
+h1 {
+  color: #6185c9;
+  font-family: "Great Vibes", cursive;
+  font-size: 5vw;
+  line-height: 160px;
+  font-weight: normal;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  text-align: center;
+  text-shadow: 0 1px 1px #fff;
+}
+.container {
+  height: 100vh;
+}
+.animation {
+  cursor: pointer;
+  overflow: hidden;
+  // border: none !important;
+
+  img {
+    border: none;
+  }
+  img:hover {
+    transform: scale(1.2);
+  }
+}
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+
+  img{
+    width: 80vh;
+    height: 80vh;
+  }
+}
+
+
+/* Modal Content (image) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Add Animation */
+.modal-content{  
+  -webkit-animation-name: zoom;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+
+@-webkit-keyframes zoom {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoom {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+/* The Close Button */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
