@@ -7,16 +7,16 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.scss']
+  styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
   userobj: user = new user();
 
-  isSuccessful:boolean = false;
+  isSuccessful: boolean = false;
   isSignUpFailed: boolean = false;
-  valueclear:boolean=false;
-  valueclearpwd:boolean=false;
-  passwordne:boolean=false;
+  valueclear: boolean = false;
+  valueclearpwd: boolean = false;
+  passwordne: boolean = false;
   // errorMessage = '';
   constructor(
     private fb: FormBuilder,
@@ -25,14 +25,16 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-  
+
   userdetails: FormGroup = this.fb.group({
     email: [
       '',
       [
         Validators.required,
         Validators.email,
-        Validators.pattern('^[a-zA-Z0-9][a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-z]{2,4}$'),
+        Validators.pattern(
+          '^[a-zA-Z0-9][a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-z]{2,4}$'
+        ),
       ],
     ],
     password: [
@@ -44,21 +46,19 @@ export class SignupComponent implements OnInit {
         ),
       ],
     ],
-    cpassword: ['',Validators.required],
+    cpassword: ['', Validators.required],
   });
 
-iffocus(){
- this.valueclear= (this.userdetails.value.email==''?false:true);
- 
-}
-iffocuspwd(){
-  this.valueclearpwd= (this.userdetails.value.password==''?false:true);
-}
-  ifpwdnot(){
-    this.passwordne= (this.userdetails.value.cpassword==''?false:true);
+  iffocus() {
+    this.valueclear = this.userdetails.value.email == '' ? false : true;
+  }
+  iffocuspwd() {
+    this.valueclearpwd = this.userdetails.value.password == '' ? false : true;
+  }
+  ifpwdnot() {
+    this.passwordne = this.userdetails.value.cpassword == '' ? false : true;
   }
   registerUser() {
-
     this.userobj.email = this.userdetails.value.email;
     this.userobj.password = this.userdetails.value.password;
 
@@ -67,23 +67,21 @@ iffocuspwd(){
         if (!res.error) {
           this.userdetails.reset();
           this.isSignUpFailed = false;
-          this.isSuccessful =true;
-         setTimeout(() => {
-          this.router.navigate(['/login']);
-          console.warn("timeout");
-          
-         }, 3000);
+          this.isSuccessful = true;
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 3000);
         }
-
-       
 
         // return res;
       },
       (err) => {
-
         this.isSignUpFailed = true;
+        setTimeout(() => {
+          this.isSignUpFailed = false;
+          console.warn('timeout');
+        }, 3000);
       }
     );
   }
-
 }
