@@ -1,94 +1,101 @@
 <!-- sign up form -->
 
 <!--validations and then enable button with ngIf  -->
-<div class="bg ">
-    <div class=" container ">
-     <div class="row  "> 
-      <form [formGroup]="userdetails" (ngSubmit)="registerUser()" class=" bg-light col-12 p-3 mt-5 main">
-        <h3 class="text-center pb-2">New User Register</h3>
-       <div class="w-100 m-auto pb-4 ">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input
-            type="email"
-            formControlName="email"
-            class="form-control"
-            (focus)='iffocus()'
-            (blur)='iffocus()'
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-          />
-          <div id="emailHelp" class="form-text">
-            We'll never share your email with anyone else.
+<div class="bg pb-5">
+    <div class=" container">
+     <div class="row d-flex mb-5"> 
+      <div class=" bg-light col-12 p-3 mt-5 main">
+        <form [formGroup]="userdetails" (ngSubmit)="registerUser()" >
+          <h3 class="text-center pb-2">New User Register</h3>
+         <div class="w-100 m-auto pb-4 ">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email address</label>
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control"
+              (focus)='iffocus()'
+              (blur)='iffocus()'
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
           </div>
-        </div>
-        <div
-          class="alert alert-danger mt-4"
-          role="alert"
-          *ngIf="
-            (userdetails.controls['email'].touched &&
-            userdetails.controls['email'].invalid)&&(valueclear)
-          "
-        >
-          Please provide valid email!
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input
-            type="password"
-            formControlName="password"
-            (focus)='iffocuspwd()'
-            (blur)='iffocuspwd()'
-            class="form-control"
-            id="exampleInputPassword1"
-          />
-        </div>
-        <div
-          class="alert alert-danger mt-4"
-          role="alert"
-          *ngIf="
-            userdetails.controls['password'].touched &&
-            userdetails.controls['password'].invalid&&valueclearpwd
-          "
-        >
-          Please provide valid password ! 
-          <ul style="list-style-type: none">
-            <li>Contains atleast 8 characters</li>
-            <li>Contains first letter should not be special character </li>
-            <li>Contains atleast 1 special character</li>
-            <li>Contains atleast 1 uppercase or lowercase character </li>
-            <li>Contains atleast 1 number</li>
-          </ul>
-        </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-          <input
-            type="password"
-            (focus)='ifpwdnot()'
-            (blur)='ifpwdnot()'
-            formControlName="cpassword"
-            class="form-control"
-            id="exampleInputPassword"
-          />
-        </div>
-        <div class="alert alert-danger" role="alert" *ngIf="
-        (userdetails.controls['password'].value !==
-        userdetails.controls['cpassword'].value) && userdetails.controls['cpassword'].touched && valueclearpwd
-      ">
-        Passwords are not matching !
-        </div>
-        <button
-          type="submit"
-          [disabled]="!userdetails.valid"
-          class="button-43 btn "
-        >
-          Sign Up
-        </button>
-        <div class="alert alert-danger mt-3" role="alert" *ngIf="isSignUpFailed">
-        The email is already in use. Please choose another email address !
-        </div>
-       </div>
-      </form></div>
+          <div
+            class="alert alert-danger mt-4"
+            role="alert"
+            *ngIf="
+              (userdetails.controls['email'].touched &&
+              userdetails.controls['email'].invalid)&&(valueclear)
+            "
+          >
+            Please provide valid email!
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input
+              type="password"
+              formControlName="password"
+              (focus)='iffocuspwd()'
+              (blur)='iffocuspwd()'
+              class="form-control"
+              id="exampleInputPassword1"
+            />
+          </div>
+         
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
+            <input
+              type="password"
+              (focus)='ifpwdnot()'
+              (blur)='ifpwdnot()'
+              formControlName="cpassword"
+              class="form-control"
+              id="exampleInputPassword"
+            />
+          </div>
+          <div class="alert alert-danger" role="alert" *ngIf="
+          (userdetails.controls['password'].value !==
+          userdetails.controls['cpassword'].value) && userdetails.controls['cpassword'].touched && valueclearpwd
+        ">
+          Passwords are not matching !
+          </div>
+          <button
+            type="submit"
+            [disabled]="!userdetails.valid"
+            class="button-43 btn "
+          >
+            Sign Up
+          </button>
+          <div class="alert alert-danger  mt-3" role="alert" *ngIf="isSignUpFailed">
+          The email is already in use. Please choose another email address !
+          </div>
+          <div class="alert alert-success  mt-3" role="alert" *ngIf="isSuccessful">
+            Signup Successfully Completed 
+            </div>
+         </div>
+        </form>
+      </div>
+      <div
+      class="alert alert-danger mt-4 p-3 mt-5 main "
+      role="alert"
+      *ngIf="
+        userdetails.controls['password'].touched &&
+        userdetails.controls['password'].invalid&&valueclearpwd
+      "
+    >
+      Please provide valid password ! 
+      <ul style="list-style-type: none">
+        <li>Contains atleast 8 characters</li>
+        <li>Contains first letter should not be special character </li>
+        <li>Contains atleast 1 special character</li>
+        <li>Contains atleast 1 uppercase or lowercase character </li>
+        <li>Contains atleast 1 number</li>
+      </ul>
+    </div>
+    </div>
     </div>
   </div>
   

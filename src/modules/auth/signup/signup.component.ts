@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit {
   userobj: user = new user();
 
-  // isSuccessful = false;
+  isSuccessful:boolean = false;
   isSignUpFailed: boolean = false;
   valueclear:boolean=false;
   valueclearpwd:boolean=false;
@@ -44,56 +44,44 @@ export class SignupComponent implements OnInit {
         ),
       ],
     ],
-    cpassword: [''],
+    cpassword: ['',Validators.required],
   });
 
 iffocus(){
  this.valueclear= (this.userdetails.value.email==''?false:true);
- console.warn(this.valueclear);
  
 }
 iffocuspwd(){
   this.valueclearpwd= (this.userdetails.value.password==''?false:true);
-  console.warn(this.valueclearpwd);
 }
   ifpwdnot(){
     this.passwordne= (this.userdetails.value.cpassword==''?false:true);
-    console.warn(this.passwordne);
   }
   registerUser() {
-    console.warn(this.userdetails.value);
 
     this.userobj.email = this.userdetails.value.email;
     this.userobj.password = this.userdetails.value.password;
-    console.warn(this.userobj);
 
     this.authservice.signUp(this.userobj).subscribe(
       (res) => {
         if (!res.error) {
           this.userdetails.reset();
           this.isSignUpFailed = false;
-          console.warn(this.isSignUpFailed);
-
+          this.isSuccessful =true;
+         setTimeout(() => {
           this.router.navigate(['/login']);
+          console.warn("timeout");
+          
+         }, 3000);
         }
 
-        // if(!res)
-        // {
-        //   console.warn("hi");
+       
 
-        //   this.isSignUpFailed=true;
-        //   console.warn(this.isSignUpFailed);
-
-        // }
-        console.warn('res :' + JSON.stringify(res));
-
-        return res;
+        // return res;
       },
       (err) => {
-        console.warn(err);
 
         this.isSignUpFailed = true;
-        console.warn(this.isSignUpFailed);
       }
     );
   }

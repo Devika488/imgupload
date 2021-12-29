@@ -35,16 +35,6 @@ export class SigninComponent implements OnInit {
   
   }
 
-  // @HostListener("window:resize", [])
-  // onResize() {
-  //   var width = window.innerWidth;
-  //   this.mobile = width < 992?false:true;
-  //   console.warn(this.mobile);
-
-  //   return this.mobile;
-    
-  // }
-
 
   ifformfocus(){
    
@@ -52,28 +42,22 @@ export class SigninComponent implements OnInit {
   // input
   iffocus(){
     this.valueclear= (this.signinForm.value.email==''?false:true);
-    console.warn(this.valueclear);
     
    }
   //  pwd
      iffocuspwd(){
       this.valueclearpwd= (this.signinForm.value.password==''?false:true);
-      console.warn(this.valueclearpwd);
      }
 
 
   loginUser() {
-    console.warn(this.signinForm.value);
     this.authService.signIn(this.signinForm.value)  .subscribe((res: any) => {
       sessionStorage.setItem('access_token', res.token);
       sessionStorage.setItem('username',this.signinForm.value.email)
       this.islogin=false;
-      // console.warn("res :"+res);
-      // console.warn(JSON.stringify(res)); //undefined
+    
       this.authService.currentUser = res;
-      console.warn('inside signin ' + res);
-      // this.getloggin=false;
-      console.warn("getloggin in child:"+this.getloggin);
+    
       
       this.router.navigate(['/gallery']);
       
@@ -81,12 +65,10 @@ export class SigninComponent implements OnInit {
      
     
     },err=>{
-      console.warn(err);
 
       this.islogin=true;
 
       setInterval(()=>{this.islogin=false;
-        console.warn(this.islogin);
         
       },10000);
  

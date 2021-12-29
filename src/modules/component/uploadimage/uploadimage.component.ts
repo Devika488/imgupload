@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/shared/_services/user.service';
-import { browserRefresh } from 'src/app/app.component';
+// import { browserRefresh } from 'src/app/app.component';
 import { AuthService } from 'src/shared/_services/auth.service';
 import {
   AngularFireStorage,
@@ -32,18 +32,11 @@ export class UploadimageComponent implements OnInit {
   uploadfail: boolean = false;
   uploadProgress!:Observable<number|undefined>;
   progressInfo: string = '';
-  browserRefresh: boolean = false;
+  ext: boolean = false;
   imgSrc: String = '../../../assets/images/imgupload.jpg';
 
   ngOnInit(): void {
-    this.browserRefresh = browserRefresh;
-    console.log('refreshed?:', this.browserRefresh);
-    if (this.browserRefresh) {
-      console.warn(sessionStorage.getItem('username'));
-      console.warn(sessionStorage.getItem('access_token'));
-
-      this.auth.doLogout();
-    }
+   
   }
   file: any = null;
   filename: any = null;
@@ -56,22 +49,33 @@ export class UploadimageComponent implements OnInit {
   onImageChange(event: any) {
     // const read= new FileReader;
     const file: File = event.target.files[0];
+    let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
     if (file) {
-      console.warn(file);
-      console.warn(file.name);
-      this.filename = file.name;
-      this.file = file;
      
-      // for file preview use filereader ,then we can
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
+     
+      this.filename = file.name;
+      if(allowedExtensions.exec(this.filename)){
+        this.file = file;
+     
+        // for file preview use filereader ,then we can
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+  
+        reader.onload = () => {
+          this.imgSrc = reader.result as string;
+        };
+        this.uploadfile.patchValue({user:sessionStorage.getItem('username')});
+      }
+      else{
+        this.imgSrc = '../../../assets/images/imgupload.jpg';
+        this.ext=true;
+        setTimeout(() => {
+          this.ext=false;
+          this.uploadfile.reset();
 
-      reader.onload = () => {
-        this.imgSrc = reader.result as string;
-        // console.warn( reader.result as string);
-      };
-      this.uploadfile.patchValue({user:sessionStorage.getItem('username')});
-      console.warn(this.uploadfile.value);
+        }, 2000);
+      }
+     
       
     } else {
       this.imgSrc = '../../../assets/images/imgupload.jpg';
@@ -80,9 +84,8 @@ export class UploadimageComponent implements OnInit {
 
   // file upload
   upload(formvalue: any) {
-    if (this.uploadfile.valid) {
-      console.warn('file :' + this.file);
-      console.warn('formvalue : ' + JSON.stringify(formvalue));
+    if (this.uploadfile.valid && this.ext===false) {
+     
       this.uploadfail = false;
       let filepath = `${sessionStorage.getItem('username')}/${this.filename
         .split('.')
@@ -99,7 +102,6 @@ export class UploadimageComponent implements OnInit {
         .pipe(
           finalize(() => {
             fileref.getDownloadURL().subscribe((url) => {
-              console.warn('url : ' + url);
               formvalue['imgurl'] = url;
               this.user.insertimagedetails(formvalue);
               // <---reset
@@ -113,7 +115,6 @@ export class UploadimageComponent implements OnInit {
 
               // reset--->
             });
-            console.warn('file ref : ' + this.storage.ref(filepath));
           })
         )
         .subscribe(

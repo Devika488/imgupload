@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/shared/_services/user.service';
-import { browserRefresh } from 'src/app/app.component';
+// import { browserRefresh } from 'src/app/app.component';
 import { AuthService } from 'src/shared/_services/auth.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class GalleryComponent implements OnInit {
   imageList: any = [];
   rowindex: any = [];
   imageListUser:any=[];
-  browserRefresh: boolean = false;
+  // browserRefresh: boolean = false;
 show:boolean=false;
   // close span
   open(){
@@ -26,19 +26,10 @@ close(){
 
   ngOnInit(): void {
     
-      this.browserRefresh = browserRefresh;
-      console.log('refreshed?:', this.browserRefresh);
-      if (this.browserRefresh) {
-        console.warn(sessionStorage.getItem('username'));
-        console.warn(sessionStorage.getItem('access_token'));
-  
-        this.auth.doLogout();
-      }
-    
+     
     this.user.imagedetailsList.snapshotChanges().subscribe((res) => {
       this.imageList = res.map((item) => {
         if (item.payload.val().user === sessionStorage.getItem('username')) {
-          console.warn('payload ' + item.payload.val().user);
           return item.payload.val().imgurl;
         }
       });
@@ -47,9 +38,6 @@ close(){
       );
 
       this.imageListUser= this.imageList.filter(function (list:any) {return list != null;});
-      // console.warn("imageList : "+JSON.stringify(this.imageListUser));
-
-      // console.warn("imageList : "+JSON.stringify(this.imageList));
       
     });
   }
