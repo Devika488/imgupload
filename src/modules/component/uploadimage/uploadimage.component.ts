@@ -129,7 +129,7 @@ export class UploadimageComponent implements OnInit {
 
             this.imgSrc = '../../../assets/images/imgupload.jpg';
             this.uploadfail = true;
-            setInterval(() => {
+            setTimeout(() => {
               this.uploadfail = false;
             }, 5000);
           }
@@ -138,7 +138,7 @@ export class UploadimageComponent implements OnInit {
       this.uploadfile.reset();
       this.imgSrc = '../../../assets/images/imgupload.jpg';
       this.uploadfail = true;
-      setInterval(() => {
+      setTimeout(() => {
         this.uploadfail = false;
       }, 5000); // an if condition for upload fail message
     }

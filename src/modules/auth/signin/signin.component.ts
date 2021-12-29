@@ -68,9 +68,9 @@ export class SigninComponent implements OnInit {
 
       this.islogin=true;
 
-      setInterval(()=>{this.islogin=false;
+      setTimeout(()=>{this.islogin=false;
         
-      },10000);
+      },5000);
  
     }
     );
