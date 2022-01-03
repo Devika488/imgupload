@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/shared/_services/auth.service';
-import { user } from './signup';
+import { user } from '../../../models/signup';
 import { Router } from '@angular/router';
 
 @Component({
@@ -79,8 +79,8 @@ export class SignupComponent implements OnInit {
         this.isSignUpFailed = true;
         setTimeout(() => {
           this.isSignUpFailed = false;
-          console.warn('timeout');
-        }, 3000);
+          this.userdetails.reset();
+        }, 1500);
       }
     );
   }

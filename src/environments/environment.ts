@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  // baseUrl:,
    firebaseConfig: {
     apiKey: "AIzaSyBF5U_oOPcwYIRqWOFY3Du2r1iPUTeliuc",
     authDomain: "album-1152b.firebaseapp.com",

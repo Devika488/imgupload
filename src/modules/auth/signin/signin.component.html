@@ -2,88 +2,92 @@
 <!-- validation login- invalid details-->
 <div class="container pb-5">
   <div class="row m-auto mt-5 mb-5">
-      <div  class="ms-auto w-25 me-auto h-50 mt-5 col-6 col-md-6">
-        <img
-          src="../../../assets/images/blog-wp-login.png"
-          alt="login"
-          width="100%"
-          class="mt-2"
-        />
-      </div>
-      <div class="m-auto text-center mt-5 main p-5 col-6 col-md-6">
-        <h3>Login Form</h3>
-        <div class="form m-auto w-100">
-          <form
-            class="bottom-0"
-            [formGroup]="signinForm"
-            (ngSubmit)="loginUser()"
+    <div class="ms-auto w-25 me-auto h-50 mt-5 col-6 col-md-6">
+      <img
+        src="../../../assets/images/blog-wp-login.png"
+        alt="login"
+        width="100%"
+        class="mt-2"
+      />
+    </div>
+    <div class="m-auto text-center mt-5 main p-5 col-6 col-md-6">
+      <h3>Login Form</h3>
+      <div class="form m-auto w-100">
+        <form
+          class="bottom-0"
+          [formGroup]="signinForm"
+          (ngSubmit)="loginUser()"
+        >
+          <div class="input-group mb-3 mt-4">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Email</span
+            >
+            <input
+              type="text"
+              class="form-control"
+              formControlName="email"
+              (focus)="iffocus()"
+              (blur)="iffocus()"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+
+          <div
+            class="alert alert-danger mt-4"
+            role="alert"
+            *ngIf="
+              signinForm.controls['email']?.touched &&
+              signinForm.controls['email']?.invalid &&
+              valueclear
+            "
           >
-            <div class="input-group mb-3 mt-4">
-              <span class="input-group-text" id="inputGroup-sizing-default"
-                >Email</span
-              >
-              <input
-                type="text"
-                class="form-control"
-                formControlName="email"
-                (focus)="iffocus()"
-                (blur)="iffocus()"
-                aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default"
-              />
-            </div>
-      
-            <div
-              class="alert alert-danger mt-4"
-              role="alert"
-              *ngIf="
-                signinForm.controls['email'].touched &&
-                signinForm.controls['email'].invalid &&
-                valueclear
-              "
+            Please provide valid email!
+          </div>
+          <div class="input-group mb-3 mt-2">
+            <span class="input-group-text" id="inputGroup-sizing-default"
+              >Password</span
             >
-              Please provide valid email!
-            </div>
-            <div class="input-group mb-3 mt-2">
-              <span class="input-group-text" id="inputGroup-sizing-default"
-                >Password</span
-              >
-              <input
-                type="password"
-                class="form-control"
-                formControlName="password"
-                (focus)="iffocuspwd()"
-                (blur)="iffocuspwd()"
-                aria-label="Sizing example input"
-                aria-describedby="inputGroup-sizing-default"
-              />
-            </div>
-            <div
-              class="alert alert-danger mt-4"
-              role="alert"
-              *ngIf="
-                signinForm.controls['password'].touched &&
-                signinForm.controls['password'].invalid &&
-                valueclearpwd
-              "
-            >
-              Please provide valid password !
-            </div>
-            <button type="submit" class="m-auto btn button-43 mb-5" [disabled]="signinForm.invalid"> 
-              Login
-            </button>
-            <div
-              *ngIf="(valueclear || valueclearpwd) && islogin"
-              class="alert alert-danger"
-              role="alert"
-            >
-              Invalid email id or password !
-            </div>
-          </form>
-          <a class="text-center" routerLink="/signup"
-            >Create a new user account</a
+            <input
+              type="password"
+              class="form-control"
+              formControlName="password"
+              (focus)="iffocuspwd()"
+              (blur)="iffocuspwd()"
+              aria-label="Sizing example input"
+              aria-describedby="inputGroup-sizing-default"
+            />
+          </div>
+          <div
+            class="alert alert-danger mt-4"
+            role="alert"
+            *ngIf="
+              signinForm.controls['password']?.touched &&
+              signinForm.controls['password']?.invalid &&
+              valueclearpwd
+            "
           >
-        </div>
+            Please provide valid password !
+          </div>
+          <button
+            type="submit"
+            class="m-auto btn button-43 mb-5"
+            [disabled]="signinForm?.invalid"
+          >
+            Login
+          </button>
+          <div
+            *ngIf="(valueclear || valueclearpwd) && islogin"
+            class="alert alert-danger"
+            role="alert"
+          >
+            Invalid email id or password !
+          </div>
+        </form>
+        <a class="text-center" routerLink="/signup"
+          >Create a new user account</a
+        >
       </div>
     </div>
+  </div>
 </div>

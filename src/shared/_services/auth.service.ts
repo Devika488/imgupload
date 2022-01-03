@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { user } from 'src/modules/auth/signup/signup';
+import { user } from 'src/models/signup';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import {
