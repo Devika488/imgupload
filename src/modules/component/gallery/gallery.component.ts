@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/core/_services/user.service';
+import { UserService } from 'src/shared/_services/user.service';
 // import { browserRefresh } from 'src/app/app.component';
-import { AuthService } from 'src/core/_services/auth.service';
+import { AuthService } from 'src/shared/_services/auth.service';
 
 @Component({
   selector: 'app-gallery',

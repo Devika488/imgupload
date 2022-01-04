@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/core/_services/auth.service';
-import { ErrServicesService } from 'src/core/_services/errservices.service';
+import { AuthService } from 'src/shared/_services/auth.service';
+import { ErrServicesService } from 'src/shared/_services/errservices.service';
 
 @Component({
   selector: 'app-signin',
