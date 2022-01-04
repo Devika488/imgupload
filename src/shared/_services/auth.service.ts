@@ -8,12 +8,14 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment.prod';
+import { apiPaths } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  endpoint: string = 'https://serene-hollows-11661.herokuapp.com/api/v1';
+  endpoint: string = environment.baseUrl;
   headers = new HttpHeaders().set(
     'Content-Type',
     'application/x-www-form-urlencoded'
@@ -24,15 +26,14 @@ export class AuthService {
 
   // Sign-up
   signUp(user: user): Observable<any> {
-    let api = `${this.endpoint}/signup`;
-    return this.http.post(api, user).pipe(catchError(this.handleError));
+    let api = `${this.endpoint}/${apiPaths.signup}`;
+    
+    return this.http.post(api, user);
   }
 
   // Sign-in
   signIn(user: user) {
-    console.warn('USER:' + user.email + '&' + user.password);
-    // console.warn(".value"+user.value);
-    return this.http.post<any>(`${this.endpoint}/signin`, user);
+    return this.http.post<any>(`${this.endpoint}/${apiPaths.signin}`, user);
   }
 
 
@@ -43,7 +44,6 @@ isLoggedIn(): boolean {
 }
 
 
-  //get token :-Authorization :  { token }
   getToken() {
     return sessionStorage.getItem('access_token');
   }
@@ -60,15 +60,15 @@ isLoggedIn(): boolean {
   }
 
   // Error
-  handleError(error: HttpErrorResponse) {
-    let msg = '';
-    if (error.error instanceof ErrorEvent) {
-      // client-side error
-      msg = error.error.message;
-    } else {
-      // server-side error
-      msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
-    }
-    return throwError(msg);
-  }
+  // handleError(error: HttpErrorResponse) {
+  //   let msg = '';
+  //   if (error.error instanceof ErrorEvent) {
+  //     // client-side error
+  //     msg = error.error.message;
+  //   } else {
+  //     // server-side error
+  //     msg = `Error Code: ${error.status}\nMessage: ${error.message}`;
+  //   }
+  //   return throwError(msg);
+  // }
 }

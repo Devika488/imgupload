@@ -1,5 +1,4 @@
 // Get the modal
-console.log("hi script");
 
 function view(src){
     console.log("onclick image :"+src);

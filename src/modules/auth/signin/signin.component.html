@@ -1,4 +1,3 @@
-<!--  login form  -->
 <!-- validation login- invalid details-->
 <div class="container pb-5">
   <div class="row m-auto mt-5 mb-5">
@@ -81,7 +80,8 @@
             class="alert alert-danger"
             role="alert"
           >
-            Invalid email id or password !
+            {{ errmsg }}
+            <!-- Invalid email id or password ! -->
           </div>
         </form>
         <a class="text-center" routerLink="/signup"

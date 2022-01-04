@@ -88,7 +88,8 @@
             role="alert"
             *ngIf="isSignUpFailed"
           >
-            The email is already in use. Please choose another email address !
+          {{errmsg}}
+            <!-- The email is already in use. Please choose another email address ! -->
           </div>
           <div
             class="alert alert-success w-100 mt-3"

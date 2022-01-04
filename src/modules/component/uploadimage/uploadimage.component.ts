@@ -11,33 +11,30 @@ import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-uploadimage',
   templateUrl: './uploadimage.component.html',
-  styleUrls: ['./uploadimage.component.scss']
+  styleUrls: ['./uploadimage.component.scss'],
 })
 export class UploadimageComponent implements OnInit {
- constructor(
+  constructor(
     private fb: FormBuilder,
     private user: UserService,
     private auth: AuthService,
     private storage: AngularFireStorage,
-    private router:Router
+    private router: Router
   ) {}
 
   // form = new FormData();
   progressValue!: AngularFireUploadTask;
   reportProgress: boolean = false;
   uploadfail: boolean = false;
-  uploadProgress!:Observable<number|undefined>;
+  uploadProgress!: Observable<number | undefined>;
   progressInfo: string = '';
   ext: boolean = false;
   imgSrc: String = '../../../assets/images/imgupload.jpg';
 
-  ngOnInit(): void {
-   
-  }
+  ngOnInit(): void {}
   file: any = null;
   filename: any = null;
   uploadfile: FormGroup = this.fb.group({
@@ -51,32 +48,28 @@ export class UploadimageComponent implements OnInit {
     const file: File = event.target.files[0];
     let allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
     if (file) {
-     
-     
       this.filename = file.name;
-      if(allowedExtensions.exec(this.filename)){
+      if (allowedExtensions.exec(this.filename)) {
         this.file = file;
-     
+
         // for file preview use filereader ,then we can
         const reader = new FileReader();
         reader.readAsDataURL(file);
-  
+
         reader.onload = () => {
           this.imgSrc = reader.result as string;
         };
-        this.uploadfile.patchValue({user:sessionStorage.getItem('username')});
-      }
-      else{
+        this.uploadfile.patchValue({
+          user: sessionStorage.getItem('username'),
+        });
+      } else {
         this.imgSrc = '../../../assets/images/imgupload.jpg';
-        this.ext=true;
+        this.ext = true;
         setTimeout(() => {
-          this.ext=false;
+          this.ext = false;
           this.uploadfile.reset();
-
         }, 2000);
       }
-     
-      
     } else {
       this.imgSrc = '../../../assets/images/imgupload.jpg';
     }
@@ -84,8 +77,7 @@ export class UploadimageComponent implements OnInit {
 
   // file upload
   upload(formvalue: any) {
-    if (this.uploadfile.valid && this.ext===false) {
-     
+    if (this.uploadfile.valid && this.ext === false) {
       this.uploadfail = false;
       let filepath = `${sessionStorage.getItem('username')}/${this.filename
         .split('.')
@@ -109,7 +101,7 @@ export class UploadimageComponent implements OnInit {
               this.file = null;
               this.uploadfile.reset();
               this.imgSrc = '../../../assets/images/imgupload.jpg';
-              
+
               this.reportProgress = false;
               this.router.navigate(['/gallery']);
 

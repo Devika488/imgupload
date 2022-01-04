@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/shared/_services/auth.service';
 import { user } from '../../../models/signup';
 import { Router } from '@angular/router';
+import { ErrServicesService } from 'src/shared/_services/errservices.service';
+
 
 @Component({
   selector: 'app-signup',
@@ -11,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class SignupComponent implements OnInit {
   userobj: user = new user();
-
+  errmsg:string='';
   isSuccessful: boolean = false;
   isSignUpFailed: boolean = false;
   valueclear: boolean = false;
@@ -21,7 +23,8 @@ export class SignupComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authservice: AuthService,
-    private router: Router
+    private router: Router,
+    private errservice:ErrServicesService
   ) {}
 
   ngOnInit(): void {}
@@ -64,7 +67,7 @@ export class SignupComponent implements OnInit {
 
     this.authservice.signUp(this.userobj).subscribe(
       (res) => {
-        if (!res.error) {
+        if (!res.error) {          
           this.userdetails.reset();
           this.isSignUpFailed = false;
           this.isSuccessful = true;
@@ -72,10 +75,10 @@ export class SignupComponent implements OnInit {
             this.router.navigate(['/login']);
           }, 3000);
         }
-
-        // return res;
-      },
+      }
+      ,
       (err) => {
+        this.errmsg=this.errservice.message;
         this.isSignUpFailed = true;
         setTimeout(() => {
           this.isSignUpFailed = false;
@@ -84,4 +87,5 @@ export class SignupComponent implements OnInit {
       }
     );
   }
+
 }

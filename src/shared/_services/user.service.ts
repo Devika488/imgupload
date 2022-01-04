@@ -4,7 +4,6 @@ import {
   AngularFireDatabase,
   AngularFireList,
 } from '@angular/fire/compat/database';
-// const API_URL = 'https://serene-hollows-11661.herokuapp.com/api/v1/upload';// url upload
 @Injectable({
   providedIn: 'root',
 })
