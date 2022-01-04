@@ -63,7 +63,7 @@
                 id="exampleInputPassword"
               />
             </div>
-        
+
             <div
               class="alert alert-danger"
               role="alert"
@@ -76,12 +76,17 @@
             >
               Passwords are not matching !
             </div>
-            {{userdetails.controls['password']?.value !==
-            userdetails.controls['cpassword']?.value}},{{userdetails.controls['cpassword']?.touched}},{{passwordne}}
+            {{
+              userdetails.controls["password"]?.value !==
+                userdetails.controls["cpassword"]?.value
+            }},{{ userdetails.controls["cpassword"]?.touched }},{{ passwordne }}
             <button
               type="submit"
-              [disabled]="!userdetails?.valid || userdetails.controls['password']?.value !==
-              userdetails.controls['cpassword']?.value"
+              [disabled]="
+                !userdetails?.valid ||
+                userdetails.controls['password']?.value !==
+                  userdetails.controls['cpassword']?.value
+              "
               class="button-43 btn"
             >
               Sign Up
