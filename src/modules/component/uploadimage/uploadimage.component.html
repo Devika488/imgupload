@@ -29,7 +29,7 @@
   </div>
       <!-- *ngFor="let progressInfo of progressInfos" inn div mb=2 -->
       <div  *ngIf="reportProgress" class="mb-2">
-        <span>{{ progressInfo }}</span>
+        <span>Uploading.....{{ progressInfo }}.....</span>
         <!-- <span>progressinfo.filename</span> -->
         <div class="progress" *ngIf="uploadProgress | async as percentage">
           <div
