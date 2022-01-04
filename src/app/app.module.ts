@@ -5,15 +5,15 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { JwtInterceptor } from '../shared/_helpers/jwt.interceptor';
+import { JwtInterceptor } from '../core/_helpers/jwt.interceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from 'src/shared/_helpers/auth.interceptor';
+import { AuthInterceptor } from 'src/core/_helpers/auth.interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { firebaseConfig } from '../environments/environment';
-import { ErrorInterceptor } from 'src/shared/_helpers/error.interceptor';
+import { ErrorInterceptor } from 'src/core/_helpers/error.interceptor';
 import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [AppComponent],
