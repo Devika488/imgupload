@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/core/_services/auth.service';
+import { AuthService } from 'src/shared/_services/auth.service';
 // import { Subscription } from 'rxjs';
 // import { Router, NavigationStart } from '@angular/router';
 // export let browserRefresh: boolean = false;
@@ -11,13 +11,8 @@ import { AuthService } from 'src/core/_services/auth.service';
 })
 export class AppComponent{
   title = 'imgupload';
-//  subscription: Subscription;
   constructor(private auth: AuthService) {
-    // this.subscription = router.events.subscribe((event) => {
-    //   if (event instanceof NavigationStart) {
-    //     browserRefresh = !this.router.navigated;
-    //   }
-    // });
+  
   }
 // access token in localstorage checking
 isLoggedIn(){
