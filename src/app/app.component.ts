@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/shared/_services/auth.service';
-// import { Subscription } from 'rxjs';
-// import { Router, NavigationStart } from '@angular/router';
-// export let browserRefresh: boolean = false;
 
 @Component({
   selector: 'app-root',
