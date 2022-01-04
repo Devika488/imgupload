@@ -63,6 +63,7 @@
                 id="exampleInputPassword"
               />
             </div>
+        
             <div
               class="alert alert-danger"
               role="alert"
@@ -70,14 +71,17 @@
                 userdetails.controls['password']?.value !==
                   userdetails.controls['cpassword']?.value &&
                 userdetails.controls['cpassword']?.touched &&
-                valueclearpwd
+                passwordne
               "
             >
               Passwords are not matching !
             </div>
+            {{userdetails.controls['password']?.value !==
+            userdetails.controls['cpassword']?.value}},{{userdetails.controls['cpassword']?.touched}},{{passwordne}}
             <button
               type="submit"
-              [disabled]="!userdetails?.valid"
+              [disabled]="!userdetails?.valid || userdetails.controls['password']?.value !==
+              userdetails.controls['cpassword']?.value"
               class="button-43 btn"
             >
               Sign Up
@@ -88,7 +92,7 @@
             role="alert"
             *ngIf="isSignUpFailed"
           >
-          {{errmsg}}
+            {{ errmsg }}
             <!-- The email is already in use. Please choose another email address ! -->
           </div>
           <div

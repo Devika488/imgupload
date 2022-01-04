@@ -40,5 +40,7 @@ close(){
       this.imageListUser= this.imageList.filter(function (list:any) {return list != null;});
       
     });
+    console.warn(this.imageList);
+    
   }
 }
