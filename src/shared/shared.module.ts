@@ -7,18 +7,31 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AuthInterceptor } from './_helpers/auth.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule],
-  exports: [
+  imports: [CommonModule, HttpClientModule],
+  providers: [
     AuthService,
     ErrServicesService,
     UserService,
     AuthGuard,
-    AuthInterceptor,
-    ErrorInterceptor,
-    JwtInterceptor,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true,
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
   ],
 })
 export class SharedModule {}

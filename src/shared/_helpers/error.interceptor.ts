@@ -30,8 +30,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (err.error instanceof ErrorEvent) {
           errmsg = `Error: ${err.error.message}`;
         } else if (err instanceof HttpErrorResponse) {
-          //   console.log('Error Status : ' + err.status,err.error.error);
-          //   errmsg = `Error Status ${err.status}: ${err.error.error}`;
           if (err.status === 401) {
             this.routeMessageService.message = 'Please login again.';
             this.authService.doLogout();
@@ -40,16 +38,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         }
 
         if (!handled) {
-          if (err.error.error.message) {
-            this.routeMessageService.message = err.error.error.message;
-            // this.routeMessageService.message =`Error Status ${err.status}: `+JSON.stringify( err.error.error.message);
-
-            console.warn(
-              'err interceptor : ' + this.routeMessageService.message
-            );
-          } else if (err.error.error) {
-            this.routeMessageService.message = err.error.error;
-          } else {
+          this.routeMessageService.message=err.error.error.message || err.error.error ;
+          if(!this.routeMessageService.message)
+           {
             return throwError('Unexpected problem occurred');
           }
         }

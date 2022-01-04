@@ -22,6 +22,8 @@ const routes: Routes = [
   {
     path: 'upload',
     component: UploadimageComponent,
+    canActivate: [AuthGuard],
+
   },
 ];
 

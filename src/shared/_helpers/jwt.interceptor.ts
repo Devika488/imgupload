@@ -14,7 +14,7 @@ import { mergeMap } from 'rxjs/operators';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
   constructor(private auth: AngularFireAuth, private authService: AuthService) {
-    // console.log('token interceptor constructor');
+    // console.log('token interceptor constructor firebase');
   }
 
   intercept(

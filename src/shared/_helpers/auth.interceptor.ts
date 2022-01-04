@@ -5,14 +5,15 @@ import {
   HttpRequest,
   HttpEvent,
   HttpHandler,
-  HttpErrorResponse,
 } from '@angular/common/http';
 import { AuthService } from '../_services/auth.service';
-import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) {
+    // console.log('token interceptor constructor rest api');
+
+  }
 
   intercept(
     req: HttpRequest<any>,
@@ -20,6 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const authToken = this.authService.getToken();
     if (authToken) {
+
       let authrequest = req.clone({
         headers: req.headers.set('Authorization', 'Bearer ' + authToken),
       });

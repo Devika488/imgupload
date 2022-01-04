@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { user } from 'src/models/user';
+import { user } from 'src/models/signup';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';

@@ -12,7 +12,6 @@ export class GalleryComponent implements OnInit {
   imageList: any = [];
   rowindex: any = [];
   imageListUser:any=[];
-  // browserRefresh: boolean = false;
 show:boolean=false;
   // close span
   open(){
@@ -40,7 +39,6 @@ close(){
       this.imageListUser= this.imageList.filter(function (list:any) {return list != null;});
       
     });
-    console.warn(this.imageList);
     
   }
 }

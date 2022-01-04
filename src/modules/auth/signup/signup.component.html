@@ -76,8 +76,7 @@
             >
               Passwords are not matching !
             </div>
-            {{userdetails.controls['password']?.value !==
-            userdetails.controls['cpassword']?.value}},{{userdetails.controls['cpassword']?.touched}},{{passwordne}}
+           
             <button
               type="submit"
               [disabled]="!userdetails?.valid || userdetails.controls['password']?.value !==
