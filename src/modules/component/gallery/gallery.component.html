@@ -1,43 +1,29 @@
+
 <div>
   <div class="container h-auto pb-5 mb-5" *ngIf="imageListUser">
-    <h1 class="text-center">Gallery</h1>
-    <div class="row justify-content-around">
-      <div
-        class="col-lg-3 col-md-6 col-sm-12 border border-dark m-3 rounded"
-        style="height: 25vh; width: 40vh"
-      >
-        <a routerLink="/upload"
-          ><img
-            src="../../../assets/images/upload-1.jpg"
-            alt="imgupload"
-            class="img-thumbnail w-100 h-100 border-0"
-        /></a>
-      </div>
-    </div>
+    <h1 class="text-center ">Gallery</h1>
+    <div class="row justify-content-around"><div
+      class="col-lg-3 col-md-6 col-sm-12 border border-dark m-3 rounded"
+      style="height:25vh;width:40vh"
+    >
+      <a routerLink="/upload"><img src="../../../assets/images/upload-1.jpg" alt="imgupload" class=" img-thumbnail w-100 h-100 border-0 "  /></a>
+    </div></div>
     <div
       class="row justify-content-around align-items-center"
       Style=" width:100%"
-    >
-      <div
-        id="imgDiv"
+    > 
+      <div id="imgDiv"
         class="col-lg-3 col-md-6 animation col-sm-12 border m-3 rounded"
-        style="height: 28vh; width: 28vh"
+        style="height:28vh;width:28vh"
         *ngFor="let item of imageListUser"
       >
-        <img
-          src="{{ item }}"
-          alt="{{ item }}"
-          class="img-thumbnail w-100 h-100"
-          id="myImg"
-          (click)="open()"
-          onclick="view(this.src)"
-        />
+        <img src="{{ item }}" alt="{{item}}" class="img-thumbnail w-100 h-100" id="myImg" (click)="open()" onclick="view(this.src)"/>
       </div>
     </div>
   </div>
 </div>
 <!-- The Modal -->
 <div id="myModal" [hidden]="show" class="modal">
-  <span class="close" (click)="close()">&times;</span>
-  <img class="modal-content" id="img01" />
+  <span class="close" (click)="close()" >&times;</span>
+  <img class="modal-content " id="img01" >
 </div>

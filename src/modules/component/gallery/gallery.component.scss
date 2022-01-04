@@ -39,6 +39,7 @@
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.9); /* Black w/ opacity */
 
+ 
   /* Modal Content (image) */
   .modal-content {
     margin: auto;
@@ -49,7 +50,7 @@
       width: 80vh;
       height: 80vh;
     }
-
+  
     /* Add Animation */
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
