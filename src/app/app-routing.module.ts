@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-
 const routes: Routes = [
   {
     path: '',
@@ -14,8 +13,12 @@ const routes: Routes = [
     path: '',
     loadChildren: () =>
       import('../modules/auth/auth.module').then((m) => m.AuthModule),
-  }
-  
+  },
+  {
+    path: '',
+    loadChildren: () =>
+      import('../modules/notpagefound/notpagefound.module').then((m) => m.NotpagefoundModule),
+  },
 ];
 
 @NgModule({
