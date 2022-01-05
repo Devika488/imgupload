@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { user } from 'src/models/signup';
+import { user } from 'src/models/user';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -17,8 +17,7 @@ export class AuthService {
   );
   currentUser = {};
   islogin: boolean = false;
-  public content = new BehaviorSubject<any>(user);
-
+  // curruser = new BehaviorSubject<user>(this.hasToken());
 
   constructor(private http: HttpClient, public router: Router) {}
 
@@ -30,13 +29,19 @@ export class AuthService {
 
   // Sign-in
   signIn(user: user) {
-    // onDataReceived = (close: boolean) => this.content.next(user);
     return this.http.post<any>(`${this.endpoint}/${apiPaths.signin}`, user);
   }
 
   // get login
   isLoggedIn(): boolean {
-    let authToken = sessionStorage.getItem('access_token');
+    let authToken =null;
+    let user1=(sessionStorage.user);
+    console.warn(user1);
+if(user1){   
+     authToken = JSON.parse(user1).token;
+}
+        
+    // let authToken = sessionStorage.getItem('access_token');
     return authToken !== null ? true : false;
   }
 
@@ -44,12 +49,19 @@ export class AuthService {
     return sessionStorage.getItem('access_token');
   }
 
+
+  // // 
+  // private hasToken() : user {
+  //   return localStorage.getItem('token');
+  // }
+
   // check access token expire
 
   doLogout() {
     let removeToken = sessionStorage.removeItem('access_token');
-    let removeuser = sessionStorage.removeItem('user');
-    if (removeToken == null && removeuser == null) {
+    let removeuser = sessionStorage.removeItem('username');
+    let removeUser = sessionStorage.removeItem('user');
+    if (removeUser == null) {
       this.router.navigate(['/login']);
     }
   }

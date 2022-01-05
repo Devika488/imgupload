@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/shared/_services/auth.service';
 import { ErrServicesService } from 'src/shared/_services/errservices.service';
+import { user } from 'src/models/user';
 
 @Component({
   selector: 'app-signin',
@@ -16,6 +17,7 @@ export class SigninComponent implements OnInit {
     private router: Router,
     private errservice: ErrServicesService
   ) {}
+  userobj: user = new user();
   errmsg: string = '';
   islogin: boolean = false;
   getloggin: any = true;
@@ -58,8 +60,16 @@ export class SigninComponent implements OnInit {
   loginUser() {
     this.authService.signIn(this.signinForm.value).subscribe(
       (res: any) => {
+        this.userobj.email = this.signinForm.value.email;
+        this.userobj.password = this.signinForm.value.password;
+        this.userobj.token = res.token;
         sessionStorage.setItem('access_token', res.token);
         sessionStorage.setItem('username', this.signinForm.value.email);
+
+        //data stored into session storage this code works but can't get the data use Json parse in auth service.if parse is used the pgm won't work
+        sessionStorage.setItem('user',JSON.stringify(this.userobj));
+        // console.warn(sessionStorage.getItem('user'));
+
         this.islogin = false;
 
         this.authService.currentUser = res;

@@ -24,7 +24,7 @@ close(){
   constructor(private user: UserService,private auth:AuthService) {}
 
   ngOnInit(): void {
-    
+
      
     this.user.imagedetailsList.snapshotChanges().subscribe((res) => {
       this.imageList = res.map((item) => {
