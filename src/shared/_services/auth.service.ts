@@ -36,16 +36,15 @@ export class AuthService {
   isLoggedIn(): boolean {
     let authToken =null;
     let user1=(sessionStorage.user);
-    console.warn(user1);
+    // console.warn(user1);
 if(user1){   
      authToken = JSON.parse(user1).token;
 }
-        
-    // let authToken = sessionStorage.getItem('access_token');
-    return authToken !== null ? true : false;
+            return authToken !== null ? true : false;
   }
 
   getToken() {
+
     return sessionStorage.getItem('access_token');
   }
 
@@ -61,7 +60,7 @@ if(user1){
     let removeToken = sessionStorage.removeItem('access_token');
     let removeuser = sessionStorage.removeItem('username');
     let removeUser = sessionStorage.removeItem('user');
-    if (removeUser == null) {
+    if (removeUser == null && removeToken==null && removeuser==null) {
       this.router.navigate(['/login']);
     }
   }
