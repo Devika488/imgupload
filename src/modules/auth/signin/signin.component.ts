@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/shared/_services/auth.service';
 import { ErrServicesService } from 'src/shared/_services/errservices.service';
-import { user } from 'src/models/user';
+import { user } from 'src/shared/models/user';
 
 @Component({
   selector: 'app-signin',
@@ -74,7 +74,7 @@ export class SigninComponent implements OnInit {
 
         this.authService.currentUser = res;
 
-        this.router.navigate(['/gallery']);
+        this.router.navigate(['/user/gallery']);
       },
       (err) => {
         this.errmsg = this.errservice.message;

@@ -103,7 +103,7 @@ export class UploadimageComponent implements OnInit {
               this.imgSrc = '../../../assets/images/imgupload.jpg';
 
               this.reportProgress = false;
-              this.router.navigate(['/gallery']);
+              this.router.navigate(['/user/gallery']);
 
               // reset--->
             });

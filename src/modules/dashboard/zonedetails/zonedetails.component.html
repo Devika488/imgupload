@@ -1,0 +1,64 @@
+<div class="container py-5">
+  <div class="row col-md-12 col-xl-10">
+    <div class="pt-3 pb-2 text-dark">
+      <form [formGroup]="network_details" (ngSubmit)="add()">
+        <h6 class="">Network Operator Name</h6>
+        <input
+          class="rounded-pill w-100 ps-4 border border-1"
+          type="text"
+          placeholder="Enter Network operator name"
+        />
+        <div class="row col-4 col-md-12">
+          <div class="mt-4 h-100 d-md-flex align-items-center">
+            <input
+              formControlName="zone"
+              class="rounded-pill mt-2 ps-4 border border-1"
+              type="text"
+              placeholder="Enter Zone"
+            />
+            <div class="price rounded-pill mt-2 ms-2 d-flex align-middle">
+              <span class="ps-4">$</span>
+              <!-- placeholder="0.00" -->
+              <input
+                formControlName="price"
+                class="change"
+                placeholder="0.00"
+                type="number"
+              />
+            </div>
+            <button type="submit" class="button-43 rounded-pill mt-2 ms-4">
+              Add
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <!-- {{zone_details.zone}} -->
+    <table class="" *ngIf="zone_details.length">
+      <thead class="mt-2">
+        <tr class="">
+          <th scope="col" class="p-2">Zone</th>
+          <th scope="col">price/MB</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="border-bottom" *ngFor="let det of zone_details">
+          <td class="">
+            <span class="ms-2">{{ det.zone }}</span>
+          </td>
+          <td class="">
+            <span class="ms-2">{{ det.price }}</span>
+          </td>
+          <td class="align-middle">
+            <a class="delete-icon" (click)="del(this.det.id)">
+              <img
+                src="https://img.icons8.com/material-sharp/24/000000/filled-trash.png"
+              />
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

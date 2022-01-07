@@ -2,16 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
-import { NetworkComponent } from './network/network.component';
-
+import { ZonedetailsComponent } from './zonedetails/zonedetails.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    NetworkComponent
-  ],
-  imports: [
-    CommonModule,
-    DashboardRoutingModule
-  ]
+  declarations: [ ZonedetailsComponent],
+  imports: [CommonModule, DashboardRoutingModule, ReactiveFormsModule],
 })
-export class DashboardModule { }
+export class DashboardModule {}

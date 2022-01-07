@@ -20,7 +20,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
     window.alert("You don't have permission to view this page");
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/admin/login');
     return false;
   }
 }

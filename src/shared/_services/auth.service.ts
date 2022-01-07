@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { user } from 'src/models/user';
+import { user } from 'src/shared/models/user';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -61,7 +61,7 @@ if(user1){
     let removeuser = sessionStorage.removeItem('username');
     let removeUser = sessionStorage.removeItem('user');
     if (removeUser == null && removeToken==null && removeuser==null) {
-      this.router.navigate(['/login']);
+      this.router.navigate(['/admin/login']);
     }
   }
 }

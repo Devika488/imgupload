@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/shared/_services/auth.service';
-import { user } from '../../../models/user';
+import { user } from '../../../shared/models/user';
 import { Router } from '@angular/router';
 import { ErrServicesService } from 'src/shared/_services/errservices.service';
 
@@ -72,7 +72,7 @@ export class SignupComponent implements OnInit {
           this.isSignUpFailed = false;
           this.isSuccessful = true;
           setTimeout(() => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/admin/login']);
           }, 3000);
         }
       }
