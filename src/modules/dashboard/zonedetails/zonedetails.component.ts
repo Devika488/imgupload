@@ -23,27 +23,23 @@ export class ZonedetailsComponent implements OnInit {
     let zonename = Object.create(zone);
     // console.warn(typeOf(zonename));
 
-    zonename.id = this.zone_details.length + 1;
+    zonename.id = this.zone_details.length;
     zonename.zone = this.network_details.get('zone')?.value;
     zonename.price = this.network_details.get('price')?.value;
     this.network_details.patchValue({
-      id:this.zone_details.length,
+      id: this.zone_details.length,
     });
 
     this.zone_details.push(zonename);
     this.network_details.reset();
     console.warn('array : ' + JSON.stringify(this.zone_details));
   }
-  del(id: number) {
-    console.warn('hi ' + id);
-    // let newzone=[];
-  
-  this.zone_details.splice(id-1,1);
-  console.warn(this.zone_details);
-  
-    // console.warn(this.zone_details.filter(item => { item.id!==id
-    // }));
 
-    console.warn(this.zone_details);
+  del(id: number) {
+    this.zone_details.forEach((item, index) => {
+      if (item.id == id) {
+        this.zone_details.splice(index, 1);
+      }
+    });
   }
 }
