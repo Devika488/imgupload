@@ -1,0 +1,82 @@
+.container {
+  // scroll;
+  input[type="file"] {
+    color: transparent;
+  }
+  ::file-selector-button {
+    display: none;
+  }
+
+  .files input {
+    outline: 2px dashed #92b0b3;
+    outline-offset: -10px;
+    -webkit-transition: outline-offset 0.15s ease-in-out,
+      background-color 0.15s linear;
+    transition: outline-offset 0.15s ease-in-out, background-color 0.15s linear;
+    padding: 120px 0px 85px 35%;
+    text-align: center !important;
+    margin: 0;
+    background-image: url("../../../assets//images/upload.png");
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 80% !important;
+  }
+  .files input:focus {
+    outline: 2px dashed #92b0b3;
+    outline-offset: -10px;
+    -webkit-transition: outline-offset 0.15s ease-in-out,
+      background-color 0.15s linear;
+    transition: outline-offset 0.15s ease-in-out, background-color 0.15s linear;
+    border: 1px solid #92b0b3;
+  }
+
+  .files {
+    position: relative;
+    width: 100%;
+    &:after {
+      pointer-events: none;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      width: 50px;
+      right: 0;
+      height: 56px;
+      content: "";
+      display: block;
+      margin: 0 auto;
+      background-size: 100%;
+      background-repeat: no-repeat;
+    }
+    &:before {
+      position: absolute;
+      bottom: 10px;
+      left: -17%;
+      pointer-events: none;
+      width: 100%;
+      right: 0;
+      height: 57px;
+      content: " Drag file to upload ";
+      display: block;
+      margin: 0 auto;
+      color: #808080;
+      font-weight: 600;
+      text-align: center !important;
+    }
+  }
+  .sample-sheet {
+    position: relative;
+    width: 12rem;
+  div{
+    a {
+        img {
+          width: 1rem;
+        }
+      }
+      position: absolute; 
+      bottom: 0;
+      left: 0;
+  }
+  
+  }
+}

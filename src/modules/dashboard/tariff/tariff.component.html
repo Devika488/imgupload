@@ -1,0 +1,31 @@
+<div class="container mb-5">
+  <p>Upload Tariff</p>
+  <div class="row">
+    <div class="mb-5 d-md-flex">
+      <div class="">
+        <form class="">
+          <div class="files">
+            <!--<label>Upload Your File </label>-->
+
+            <input
+              type="file"
+              class="form-control"
+              (change)="onImageChange($event)"
+            />
+          </div>
+          <p class="ps-4" *ngIf="filename">Uploaded : {{ filename }}</p>
+        </form>
+      </div>
+      <div class="sample-sheet ">
+       <div> <a href="#">
+        <img
+          src="../../../assets/images/download-to-storage-drive.png"
+          alt="download-to-storage-drive"
+          class="pe-1"
+        />
+        Generate sample sheet</a
+      ></div>
+      </div>
+    </div>
+  </div>
+</div>

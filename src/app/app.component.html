@@ -1,33 +1,32 @@
-<nav class="navbar navbar-light ">
+<nav class="navbar navbar-light">
   <!-- Navbar content-->
   <!-- <h3>Image Uploader</h3> -->
-  <a routerLink="home"><img src="../assets//images/clipart1283011.png" alt="logo" height="50" class="ms-2"></a>
-  <div class="navbar-nav d-flex flex-row me-2" *ngIf='!isLoggedIn()'>
-    <a class="nav-link p-3 "  routerLink="home"
-      >Home</a
-    >
-    <a class="nav-link p-3 " routerLink="/admin/login"
-      >Login</a
-    >
-    <a class="nav-link p-3 " routerLink="/admin/signup">Sign Up</a>
+  <a routerLink="home"
+    ><img
+      src="../assets//images/clipart1283011.png"
+      alt="logo"
+      height="50"
+      class="ms-2"
+  /></a>
+  <div class="navbar-nav d-flex flex-row me-2" *ngIf="!isLoggedIn()">
+    <a class="nav-link p-3" routerLink="home">Home</a>
+    <a class="nav-link p-3" routerLink="/admin/login">Login</a>
+    <a class="nav-link p-3" routerLink="/admin/signup">Sign Up</a>
   </div>
   <!-- <input class="btn button-43 me-2" type="button" value="LogOut" *ngIf="isLoggedIn()" (click)="logout()"> -->
-  <div class="navbar-nav d-flex flex-row me-2" *ngIf='isLoggedIn()'>
-    <a class="nav-link p-3 "  routerLink="/dash/zone"
-    >Network</a
-  >
-    <a class="nav-link p-3 "  routerLink="/user/gallery"
-      >Gallery</a
-    >
-    <a class="nav-link p-3 " routerLink="/user/upload"
-      >Upload</a
-    >
-    <a class="nav-link p-3 "(click)="logout()">Logout</a>
+  <div class="navbar-nav d-flex flex-row me-2" *ngIf="isLoggedIn()">
+    <a class="nav-link p-3" routerLink="/dash/zone">Network</a>
+    <a class="nav-link p-3" routerLink="/user/gallery">Gallery</a>
+    <a class="nav-link p-3" routerLink="/user/upload">Upload</a>
+    <a class="nav-link p-3" (click)="logout()">Logout</a>
   </div>
-
 </nav>
 <!-- component content -->
-<router-outlet></router-outlet>
+<div class="container">
+  <div class="row">
+    <router-outlet></router-outlet>
+  </div>
+</div>
 <!-- <footer content > -->
 <footer class="footer w-100">
   <div class="m-auto"><p class="m-0 text-center">&copy; album</p></div>
