@@ -21,14 +21,10 @@ export class ZonedetailsComponent implements OnInit {
   });
   add() {
     let zonename = Object.create(zone);
-    // console.warn(typeOf(zonename));
 
     zonename.id = this.zone_details.length;
     zonename.zone = this.network_details.get('zone')?.value;
     zonename.price = this.network_details.get('price')?.value;
-    this.network_details.patchValue({
-      id: this.zone_details.length,
-    });
 
     this.zone_details.push(zonename);
     this.network_details.reset();
