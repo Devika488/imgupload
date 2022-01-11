@@ -28,7 +28,6 @@ export class ZonedetailsComponent implements OnInit {
 
     this.zone_details.push(zonename);
     this.network_details.reset();
-    console.warn('array : ' + JSON.stringify(this.zone_details));
   }
 
   del(id: number) {

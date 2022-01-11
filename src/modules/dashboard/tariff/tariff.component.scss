@@ -78,8 +78,7 @@
       left: 0;
     }
   }
-  .button-43 {
-    background-image: linear-gradient(-180deg, #37aee2 0%, #1e96c8 100%);
+  .button-40 {
     box-sizing: border-box;
     color: #ffffff;
     font-size: 16px;
@@ -92,23 +91,42 @@
     -webkit-user-select: none;
     touch-action: manipulation;
     float: right;
+    
+  }
+  .button-43{
+    background-image: linear-gradient(-180deg, #37aee2 0%, #1e96c8 100%);
+
     &:hover {
-      background-image: linear-gradient(-180deg, #1d95c9 0%, #17759c 100%);
-    }
+        background-image: linear-gradient(-180deg, #1d95c9 0%, #17759c 100%);
+      }
+      
+  }
+  .button-42{
+    background-image: linear-gradient(-180deg, #e24237 0%, #c8621e 100%);
+    &:hover {
+        background-image: linear-gradient(-180deg, #c9371d 0%, #9c3617 100%);
+      }
   }
   table {
     width: 100%;
     padding: 0.5rem 0.5rem;
     border-bottom-width: 1px;
     thead {
-      border-top: rgb(231, 228, 228) solid 2px;
-      border-bottom: rgb(231, 228, 228) solid 2px;
-      tr:nth-child(odd) {
-        background-color: rgb(231, 228, 228);
+    //   border-top: rgb(231, 228, 228) solid 2px;
+    //   border-bottom: rgb(231, 228, 228) solid 2px;
+      tr:first-child {
+        background-color: rgb(219, 214, 214);
+        font-weight: 300;
       }
+
     }
+    th,td{
+        table-layout: fixed;
+        width: 300px;
+    }
+   
     tr:nth-child(even) {
-      background-color: rgb(231, 228, 228);
+      background-color: #f8f7f6;
     }
     .delete-icon {
       cursor: pointer;
