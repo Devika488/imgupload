@@ -8,7 +8,7 @@ type AOA = any[][];
   styleUrls: ['./tariff.component.scss'],
 })
 export class TariffComponent implements OnInit {
-  filename: string = '';
+  filename: string = ''; 
   data: AOA = [[], []];
   invsheet: boolean = false;
   constructor() {}
@@ -36,13 +36,13 @@ export class TariffComponent implements OnInit {
         const ws: XLSX.WorkSheet = wb.Sheets[wsname];
 
         /* save data */
-        let tariff = [
-          // 'Zone',
-          // 'Country',
-          // 'Network Operator',
-          // 'Network Code',
-          // 'Increment',
-        ];
+        // let tariff = [
+        //   // 'Zone',
+        //   // 'Country',
+        //   // 'Network Operator',
+        //   // 'Network Code',
+        //   // 'Increment',
+        // ];
        const thead= [
           'Zone',
           'Country',
@@ -57,7 +57,7 @@ export class TariffComponent implements OnInit {
         
           
           this.data = <AOA>XLSX.utils.sheet_to_json(ws, { header: 1 });
-          tariff=this.data;
+          // tariff=this.data;
           // console.warn("tariff"+tariff[0]==thead.toString());
         // }
 
@@ -69,13 +69,13 @@ export class TariffComponent implements OnInit {
     }
   }
 
-  del(val:any){
-    // this.data.forEach((item, index) => {
-    //   if (val.== id) {
-    //     this.zone_details.splice(index, 1);
-    //   }
-    // });
-    console.warn(val);
+  del(val:any,row:any){
+    this.data.forEach((item, index) => {
+      if (index==row) {
+        this.data.splice(index, 1);
+      }
+    });
+    console.warn(val,row);
     
   }
   
@@ -85,10 +85,15 @@ export class TariffComponent implements OnInit {
 
     /* generate workbook and add the worksheet */
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.utils.book_append_sheet(wb, ws, 'tariff');
 
     /* save to file */
     XLSX.writeFile(wb, this.filename);
+  }
+  getData(event:any,row:any,col:any){
+
+    this.data[row+1][col]=event.target.value;
+    
   }
 
 }
