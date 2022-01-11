@@ -69,13 +69,14 @@ export class TariffComponent implements OnInit {
     }
   }
 
-  del(val:any,row:any){
+  del(row:any){
     this.data.forEach((item, index) => {
-      if (index==row) {
+      if (index==row+1) {
+        console.warn(index,row+1);
         this.data.splice(index, 1);
       }
     });
-    console.warn(val,row);
+    // console.warn(val,row);
     
   }
   
