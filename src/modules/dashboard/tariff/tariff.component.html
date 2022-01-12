@@ -68,7 +68,7 @@
               type="text"
               class="rounded-pill"
               [value]="val"
-              [ngClass]="{'highlight': validnum && indexcol===col1 && indexrow===row1 }"
+              [ngClass]="{'highlight': validnum && indexcol===col1 && row1.includes(indexrow) }"
               (blur)="getData($event,indexrow,indexcol)"
             />
             <!-- <span *ngIf="validnum">val{{value}}</span> -->

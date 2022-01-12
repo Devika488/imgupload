@@ -17,8 +17,8 @@ export class TariffComponent implements OnInit {
   @Input() zonearray: any;
   filename: string = '';
   col1: number = 0;
-  row1: number = 0;
-  cvalue:string='';
+  row1: any[] = [];
+  cvalue: string = '';
   data: AOA = [[], []];
   invsheet: boolean = false;
   validnum: boolean = false;
@@ -88,7 +88,6 @@ export class TariffComponent implements OnInit {
   }
 
   del(row: any) {
-    
     this.behav._behavalue.value.forEach((item: any, index: number) => {
       if (index == row) {
         // console.warn(index, row);
@@ -113,14 +112,23 @@ export class TariffComponent implements OnInit {
     // this.data[row][col] = event.target.value;
     if (col === 3) {
       if (Number(event.target.value)) {
-        this.validnum = false;
+        if (this.row1 !== [] || this.row1.includes(row)) {
+          this.row1.forEach((element: any, index: number) => {
+            if (element === row) {
+              console.warn(this.row1, element, index);
 
-        console.warn('inside 3');
+              this.row1.splice(index, 1);
+            }
+          });
+        } else {
+          this.validnum = false;
+          console.warn('inside 3');
 
-        this.behav._behavalue.value[row][col] = event.target.value;
+          this.behav._behavalue.value[row][col] = event.target.value;
+        }
       } else {
         this.col1 = col;
-        this.row1=row;
+        this.row1.push(row);
         console.warn('col : ' + this.col1);
         this.validnum = true;
         alert('Please enter a valid Network Code !');
