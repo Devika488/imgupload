@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
-import { Output,Input } from '@angular/core';
+import { Output, Input } from '@angular/core';
+import { tariff } from 'src/shared/interface/tariff';
 const { read, write, utils } = XLSX;
 type AOA = any[][];
 @Component({
@@ -10,7 +11,7 @@ type AOA = any[][];
 })
 export class TariffComponent implements OnInit {
   @Output() childEvent = new EventEmitter();
-  @Input() zonearray:any;
+  @Input() zonearray: any;
   filename: string = '';
 
   data: AOA = [[], []];
@@ -55,9 +56,12 @@ export class TariffComponent implements OnInit {
           'Increment',
         ];
 
-     
-        this.data = <AOA>XLSX.utils.sheet_to_json(ws, { header: 1 });
-       
+        this.data = <AOA>XLSX.utils.sheet_to_json(ws, { blankrows: false, header: 1, range: 1});
+        // console.warn(JSON.stringify(this.data));
+        this.data.forEach((item, index) => {
+            console.warn(item[3]);
+            
+        });
       };
       reader.readAsBinaryString(event.target.files[0]);
     } else {
@@ -79,14 +83,14 @@ export class TariffComponent implements OnInit {
     //  tariffdata=(JSON.stringify(this.data));
     //  const tariffdata=this.zonearray;
     //  const dataobj=JSON.stringify(tariffdata).join(JSON.stringify(this.data))
-    if(confirm("Are you Sure ?"))
-{    console.warn(JSON.stringify(this.zonearray),JSON.stringify(this.data));
-}
+    if (confirm('Are you Sure ?')) {
+      console.warn(JSON.stringify(this.zonearray), JSON.stringify(this.data));
+    }
   }
 
   getData(event: any, row: any, col: any) {
-    console.warn(  this.data[row + 1]);
-    
+    console.warn(this.data[row + 1]);
+
     this.data[row + 1][col] = event.target.value;
   }
 
@@ -97,10 +101,8 @@ export class TariffComponent implements OnInit {
   }
 
   addrow() {
-    let newRow: string[] = ['','','','',''];
-    console.warn(this.data);
-    
+    let newRow: any = ['', '', '', '', ''];
+
     this.data.push(newRow);
   }
-
 }
