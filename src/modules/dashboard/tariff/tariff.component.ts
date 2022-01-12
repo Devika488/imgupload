@@ -16,15 +16,15 @@ export class TariffComponent implements OnInit {
   @Output() childEvent = new EventEmitter();
   @Input() zonearray: any;
   filename: string = '';
-
+  col1: number = 0;
+  row1: number = 0;
+  cvalue:string='';
   data: AOA = [[], []];
   invsheet: boolean = false;
-  constructor(private dup: InputdupService,private behav:BehavService) {}
+  validnum: boolean = false;
+  constructor(private dup: InputdupService, private behav: BehavService) {}
 
   ngOnInit(): void {}
-  ngOnChanges(changes: any) {
-    console.log(changes);
-  }
   onImageChange(event: any) {
     if (event.target.files.length !== 1)
       throw new Error('Cannot use multiple files');
@@ -62,13 +62,11 @@ export class TariffComponent implements OnInit {
           'Increment',
         ];
 
-        this.data = <AOA>(
-          XLSX.utils.sheet_to_json(ws, {
-            blankrows: false,
-            header: 1,
-            range: 1,
-          })
-        );
+        this.data = <AOA>XLSX.utils.sheet_to_json(ws, {
+          blankrows: false,
+          header: 1,
+          range: 1,
+        });
         if (this.data.length === 0) {
           this.filename = '';
           this.data = [];
@@ -90,13 +88,13 @@ export class TariffComponent implements OnInit {
   }
 
   del(row: any) {
+    
     this.behav._behavalue.value.forEach((item: any, index: number) => {
       if (index == row) {
         // console.warn(index, row);
         this.data.splice(index, 1);
         // this.behav.changeValue(this.data);
         console.warn(this.behav._behavalue.value);
-        
       }
     });
   }
@@ -106,35 +104,36 @@ export class TariffComponent implements OnInit {
     //  const tariffdata=this.zonearray;
     //  const dataobj=JSON.stringify(tariffdata).join(JSON.stringify(this.data))
     if (confirm('Are you Sure ?')) {
-      console.warn(JSON.stringify(this.zonearray),this.behav._behavalue.value);
+      console.warn(JSON.stringify(this.zonearray), this.behav._behavalue.value);
     }
   }
 
   getData(event: any, row: any, col: any) {
     // console.warn('data : ' + this.data[row + 1]);
     // this.data[row][col] = event.target.value;
-    
-    if(col===3){
-      if( Number(event.target.value)){
-        console.warn("inside 3");
-        
-        this.behav._behavalue.value[row][col]=event.target.value;
-      }
-    
-    }
-    else if(col!==3){
-      console.warn("not inside 3");
+    if (col === 3) {
+      if (Number(event.target.value)) {
+        this.validnum = false;
 
-    this.behav._behavalue.value[row][col]=event.target.value;
+        console.warn('inside 3');
+
+        this.behav._behavalue.value[row][col] = event.target.value;
+      } else {
+        this.col1 = col;
+        this.row1=row;
+        console.warn('col : ' + this.col1);
+        this.validnum = true;
+        alert('Please enter a valid Network Code !');
+        console.warn('enter a number in 3rd col');
+      }
+    } else if (col !== 3) {
+      console.warn('not inside 3');
+
+      this.behav._behavalue.value[row][col] = event.target.value;
     }
-    else{
-      console.warn("enter a number in 3rd col");
-      
-    }
+
     // this.behav.changeValue(this.data);
     console.warn(this.behav._behavalue.value);
-
-
   }
 
   cancel() {
@@ -142,7 +141,6 @@ export class TariffComponent implements OnInit {
     this.filename = '';
     this.behav.changeValue(this.data);
     this.childEvent.emit();
-
   }
 
   addrow() {

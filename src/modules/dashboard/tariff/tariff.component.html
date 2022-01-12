@@ -46,6 +46,7 @@
         Add
       </button>
     </div>
+    {{validnum}}
     <table class="mb-5">
       <thead class="mt-2">
         <tr class="">
@@ -62,14 +63,15 @@
           class="border-bottom"
           *ngFor="let row of data ; let indexrow = index"
         >
-          <td *ngFor="let val of row; let indexcol = index">
+          <td *ngFor="let val of row; let indexcol = index"  >
             <input
               type="text"
               class="rounded-pill"
               [value]="val"
-              (keyup.enter)="getData(this,indexrow,indexcol)"
+              [ngClass]="{'highlight': validnum && indexcol===col1 && indexrow===row1 }"
               (blur)="getData($event,indexrow,indexcol)"
             />
+            <!-- <span *ngIf="validnum">val{{value}}</span> -->
           </td>
 
           <td class="align-middle">
