@@ -60,7 +60,7 @@
       <tbody class="mt-2">
         <tr
           class="border-bottom"
-          *ngFor="let row of data | slice:1; let indexrow = index"
+          *ngFor="let row of data ; let indexrow = index"
         >
           <td *ngFor="let val of row; let indexcol = index">
             <input
