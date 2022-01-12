@@ -37,4 +37,7 @@ export class ZonedetailsComponent implements OnInit {
       }
     });
   }
+  arrayclear(){
+    this.zone_details=[];
+  }
 }

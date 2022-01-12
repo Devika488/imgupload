@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
+import { Output,Input } from '@angular/core';
 const { read, write, utils } = XLSX;
 type AOA = any[][];
 @Component({
@@ -8,7 +9,10 @@ type AOA = any[][];
   styleUrls: ['./tariff.component.scss'],
 })
 export class TariffComponent implements OnInit {
-  filename: string = ''; 
+  @Output() childEvent = new EventEmitter();
+  @Input() zonearray:any;
+  filename: string = '';
+
   data: AOA = [[], []];
   invsheet: boolean = false;
   constructor() {}
@@ -43,24 +47,17 @@ export class TariffComponent implements OnInit {
         //   // 'Network Code',
         //   // 'Increment',
         // ];
-       const thead= [
+        const thead = [
           'Zone',
           'Country',
           'Network Operator',
           'Network Code',
           'Increment',
         ];
-       
-      
-        //try to validate is it crct sheet using header but output is always false
-        // if (<AOA>XLSX.utils.sheet_to_json(ws, { header: 1 })[0] == tariff) {
-        
-          
-          this.data = <AOA>XLSX.utils.sheet_to_json(ws, { header: 1 });
-          // tariff=this.data;
-          // console.warn("tariff"+tariff[0]==thead.toString());
-        // }
 
+     
+        this.data = <AOA>XLSX.utils.sheet_to_json(ws, { header: 1 });
+       
       };
       reader.readAsBinaryString(event.target.files[0]);
     } else {
@@ -69,32 +66,41 @@ export class TariffComponent implements OnInit {
     }
   }
 
-  del(row:any){
+  del(row: any) {
     this.data.forEach((item, index) => {
-      if (index==row+1) {
-        console.warn(index,row+1);
+      if (index == row + 1) {
+        console.warn(index, row + 1);
         this.data.splice(index, 1);
       }
     });
-    // console.warn(val,row);
-    
   }
-  
+
   export(): void {
-    /* generate worksheet */
-    const ws: XLSX.WorkSheet = XLSX.utils.aoa_to_sheet(this.data);
-
-    /* generate workbook and add the worksheet */
-    const wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, 'tariff');
-
-    /* save to file */
-    XLSX.writeFile(wb, this.filename);
+    //  tariffdata=(JSON.stringify(this.data));
+    //  const tariffdata=this.zonearray;
+    //  const dataobj=JSON.stringify(tariffdata).join(JSON.stringify(this.data))
+    if(confirm("Are you Sure ?"))
+{    console.warn(JSON.stringify(this.zonearray),JSON.stringify(this.data));
+}
   }
-  getData(event:any,row:any,col:any){
 
-    this.data[row+1][col]=event.target.value;
+  getData(event: any, row: any, col: any) {
+    console.warn(  this.data[row + 1]);
     
+    this.data[row + 1][col] = event.target.value;
+  }
+
+  cancel() {
+    this.data = [];
+    this.filename = '';
+    this.childEvent.emit();
+  }
+
+  addrow() {
+    let newRow: string[] = ['','','','',''];
+    console.warn(this.data);
+    
+    this.data.push(newRow);
   }
 
 }

@@ -62,4 +62,4 @@
     </table>
   </div>
 </div>
-<app-tariff  *ngIf="zone_details.length"></app-tariff>
+<app-tariff  *ngIf="zone_details.length" (childEvent)="arrayclear()"[zonearray]="zone_details"></app-tariff>
