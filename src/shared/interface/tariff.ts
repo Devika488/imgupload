@@ -1,4 +1,4 @@
-export interface tariff extends Array<any> {
+export interface tariff{
   zone: string;
   country: string;
   networkopr: string;

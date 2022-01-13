@@ -13,7 +13,8 @@ export class BehavService {
 
   changeValue(arr:any) {
     this._behavalue.next(arr);
-    console.warn("beh : "+JSON.stringify(this._behavalue.value));
+    // console.warn("beh : "+JSON.stringify(this._behavalue.value));
     
   }
+  
 }

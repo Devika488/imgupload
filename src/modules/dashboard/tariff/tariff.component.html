@@ -41,54 +41,62 @@
     <div>
       <button
         type="submit"
-        class="button-43 button-40 rounded-pill mt-2 ms-4 mb-2" (click)="addrow()"
+        class="button-43 button-40 rounded-pill mt-2 ms-4 mb-2"
+        (click)="addrow()"
       >
         Add
       </button>
     </div>
-    {{validnum}}
-    <table class="mb-5">
-      <thead class="mt-2">
-        <tr class="">
-          <th scope="col" class="p-2">Zone</th>
-          <th scope="col">Country</th>
-          <th scope="col">Network Operator</th>
-          <th scope="col">Network Code</th>
-          <th scope="col">Increment</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody class="mt-2">
-        <tr
-          class="border-bottom"
-          *ngFor="let row of data ; let indexrow = index"
-        >
-          <td *ngFor="let val of row; let indexcol = index"  >
-            <input
-              type="text"
-              class="rounded-pill"
-              [value]="val"
-              [ngClass]="{'highlight': validnum && indexcol===col1 && row1.includes(indexrow) }"
-              (blur)="getData($event,indexrow,indexcol)"
-            />
-            <!-- <span *ngIf="validnum">val{{value}}</span> -->
-          </td>
+    <div class="table-div">
+      <table class="mb-5">
+        <thead class="mt-2">
+          <tr class="">
+            <th  class="p-2">Zone</th>
+            <th >Country</th>
+            <th >Network Operator</th>
+            <th >Network Code</th>
+            <th >Increment</th>
+            <th ></th>
+          </tr>
+        </thead>
+        <tbody class="mt-2">
+          <tr
+            class="border-bottom"
+            *ngFor="let row of data; let indexrow = index"
+          >
+            <td *ngFor="let val of row; let indexcol = index">
+              <input
+                type="text"
+                class="rounded-pill"
+                [value]="val"
+             
+                [ngClass]="{
+                  highlight:
+                     col1===(indexcol) && row1.includes(indexrow)
+                }"
 
-          <td class="align-middle">
-            <a class="delete-icon" (click)="del(indexrow)">
-              <img
-                src="https://img.icons8.com/material-sharp/24/000000/filled-trash.png"
+                (blur)="getData($event, indexrow, indexcol)"
               />
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <!-- <span *ngIf="validnum">{{blur}}{{focus}}</span> -->
+            </td>
+
+            <td class="align-middle">
+              <a class="delete-icon" (click)="del(indexrow)">
+                <img
+                  src="https://img.icons8.com/material-sharp/24/000000/filled-trash.png"
+                />
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
     <div>
       <div>
         <button
           type="submit"
-          class="button-40 button-42 rounded-pill mt-2 ms-4 mb-2" (click)="cancel()"
+          class="button-40 button-42 rounded-pill mt-2 ms-4 mb-2"
+          (click)="cancel()"
         >
           Cancel
         </button>
