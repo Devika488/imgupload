@@ -90,7 +90,7 @@ export class TariffComponent implements OnInit {
 
   export(): void {
     if (confirm('Are you Sure ?')) {
-      console.warn(JSON.stringify(this.zonearray), this.behav._behavalue.value);
+      console.warn(JSON.stringify(this.zonearray), this.behav._behavalue.getValue());
     }
   }
 
@@ -98,7 +98,6 @@ export class TariffComponent implements OnInit {
     this.tarsergetdata.getData(event, row, col);
     this.row1 = this.tarsergetdata._isBoolean$.getValue();
     this.cvalue=this.tarsergetdata.toFindDuplicates();
-    console.warn("arry:"+ this.cvalue);
     
     if (this.row1 !== []) {
       this.col1 = 3;

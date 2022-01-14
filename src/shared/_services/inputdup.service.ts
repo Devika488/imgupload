@@ -7,7 +7,7 @@ import { tariff } from '../interface/tariff';
 export class InputdupService {
 
   constructor() { }
-  // input duplicate entries network code.
+  // checking zone values and inc
   finddup(arr: any){
     console.warn(arr);
     
