@@ -24,7 +24,7 @@ export class TariffComponent implements OnInit {
   filename: string = '';
   col1: number = 0;
   row1: number[] = [];
-  cvalue: string = '';
+  cvalue: number []= [];
   data: AOA = [[], []];
   invsheet: boolean = false;
 
@@ -61,10 +61,11 @@ export class TariffComponent implements OnInit {
           alert('Please upload a valid excel sheet');
         } else {
           // this.dup.finddup(this.data);
-          this.data.forEach((item: any, index: any) => {
-            console.warn(item[3], index);
-          });
+          
           this.behav.changeValue(this.data);
+          // this.behav._behavalue.value.forEach((item: any, index: any) => {
+          //   console.warn(item[3], index);
+          // });
         }
       };
       reader.readAsBinaryString(event.target.files[0]);
@@ -92,9 +93,13 @@ export class TariffComponent implements OnInit {
   getData(event: any, row: any, col: any) {
     this.tarsergetdata.getData(event, row, col);
     this.row1 = this.tarsergetdata._isBoolean$.getValue();
+    this.cvalue=this.tarsergetdata.toFindDuplicates();
+    console.warn("arry:"+ this.cvalue);
+    
     if (this.row1 !== []) {
       this.col1 = 3;
     }
+
   }
 
   cancel() {

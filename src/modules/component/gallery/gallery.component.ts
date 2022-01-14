@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/shared/_services/user.service';
-// import { browserRefresh } from 'src/app/app.component';
 import { AuthService } from 'src/shared/_services/auth.service';
 
 @Component({
@@ -11,21 +10,19 @@ import { AuthService } from 'src/shared/_services/auth.service';
 export class GalleryComponent implements OnInit {
   imageList: any = [];
   rowindex: any = [];
-  imageListUser:any=[];
-show:boolean=false;
+  imageListUser: any = [];
+  show: boolean = false;
   // close span
-  open(){
-    this.show=false;
+  open() {
+    this.show = false;
   }
-close(){
-  this.show=true;
-}
+  close() {
+    this.show = true;
+  }
 
-  constructor(private user: UserService,private auth:AuthService) {}
+  constructor(private user: UserService, private auth: AuthService) {}
 
   ngOnInit(): void {
-
-     
     this.user.imagedetailsList.snapshotChanges().subscribe((res) => {
       this.imageList = res.map((item) => {
         if (item.payload.val().user === sessionStorage.getItem('username')) {
@@ -33,12 +30,12 @@ close(){
         }
       });
       this.rowindex = Array.from(
-        Array(Math.ceil(this.imageList.length+1 / 3)).keys()
+        Array(Math.ceil(this.imageList.length + 1 / 3)).keys()
       );
 
-      this.imageListUser= this.imageList.filter(function (list:any) {return list != null;});
-      
+      this.imageListUser = this.imageList.filter(function (list: any) {
+        return list != null;
+      });
     });
-    
   }
 }

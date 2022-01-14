@@ -72,7 +72,7 @@
              
                 [ngClass]="{
                   highlight:
-                     col1===(indexcol) && row1.includes(indexrow)
+                     col1===(indexcol) && (row1.includes(indexrow) ||cvalue.includes(indexrow))
                 }"
 
                 (blur)="getData($event, indexrow, indexcol)"
