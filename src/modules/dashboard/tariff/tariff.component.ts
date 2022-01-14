@@ -22,9 +22,11 @@ export class TariffComponent implements OnInit {
   ) {}
 
   filename: string = '';
+  row4:number[]=[];
+  col4:number=0;
   col1: number = 0;
   row1: number[] = [];
-  cvalue: number []= [];
+  cvalue: number[] = [];
   data: AOA = [[], []];
   invsheet: boolean = false;
 
@@ -61,12 +63,16 @@ export class TariffComponent implements OnInit {
           alert('Please upload a valid excel sheet');
         } else {
           // this.dup.finddup(this.data);
-          
+          // isnumber,isduplicate
           this.behav.changeValue(this.data);
-          this.cvalue=this.tarsergetdata.toFindDuplicates();
-          if(this.cvalue){
-            this.col1=3;
+          this.row1 = this.tarsergetdata.tofindisnumber();
+          this.cvalue = this.tarsergetdata.toFindDuplicates();
+          if (this.cvalue || this.row1) {
+            this.col1 = 3;
           }
+          this.row4=this.dup.tofindincvalue();
+          if(this.row4!=[])
+            this.col4=4;
           // this.behav._behavalue.value.forEach((item: any, index: any) => {
           //   console.warn(item[3], index);
           // });
@@ -90,19 +96,31 @@ export class TariffComponent implements OnInit {
 
   export(): void {
     if (confirm('Are you Sure ?')) {
-      console.warn(JSON.stringify(this.zonearray), this.behav._behavalue.getValue());
+      console.warn(
+        JSON.stringify(this.zonearray),
+        this.behav._behavalue.getValue()
+      );
     }
   }
 
   getData(event: any, row: any, col: any) {
-    this.tarsergetdata.getData(event, row, col);
-    this.row1 = this.tarsergetdata._isBoolean$.getValue();
-    this.cvalue=this.tarsergetdata.toFindDuplicates();
-    
-    if (this.row1 !== []) {
-      this.col1 = 3;
+    const prev=this.behav._behavalue.value[row][col];
+    this.behav._behavalue.value[row][col]=event.target.value;
+    console.warn(this.behav._behavalue.getValue());
+  
+    if (col == 3) {
+      this.row1 = this.tarsergetdata.tofindisnumber();
+      this.cvalue = this.tarsergetdata.toFindDuplicates();
+      this.col1=3;
     }
+      if(this.row1.includes(row)){
+        this.behav._behavalue.value[row][col]=prev;
 
+      }
+      if(col==4){
+        this.row4=this.dup.tofindincvalue();
+          this.col4=4;
+      }
   }
 
   cancel() {
