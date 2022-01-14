@@ -1,6 +1,6 @@
 export class zone{
     id!:number;
-    operator?:string;
-    zone!:string;
-    price!:string;
+    network_operator?:string;
+    zone_name!:string;
+    zone_price!:number;
 }
