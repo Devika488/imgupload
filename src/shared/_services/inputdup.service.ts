@@ -13,14 +13,16 @@ tofindincvalue(){
   let arry: any[] = [];
   let index: any[] = [];
   this.behav._behavalue.value.forEach((item: any, index: any) => {
-    arry.push([item[4]]);
+    arry.push([item['5increment_type']]);
   });
   arry.reduce((a, e, i) => {
-    if (!((e).toString().toLowerCase()=='kb'||(e).toString().toLowerCase()=='mb')) {      
+    if (!(((e).toString().toLowerCase()=='kb')||((e).toString().toLowerCase()=='mb'))) {      
+      // console.warn("i "+i);
+      // if(true){
       index.push(i);
     }
   }, 0);
-  console.warn("index: "+index);
+  // console.warn("index: "+index);
 return index;
 
 // })

@@ -23,17 +23,17 @@ export class ZonedetailsComponent implements OnInit {
    })
   });
   add() {
-    let zonename = Object.create(zone);
+    // let zonename = Object.create(zone);
     this.network_details.patchValue({
       id:this.zone_detail.length
     });
-    zonename.id = this.zone_detail.length;
-    zonename.network_operator=this.network_details.get('network_operator')?.value;
-    zonename.zone_name = this.network_details.get('zone_details.zone_name')?.value;
-    zonename.zone_price = this.network_details.get('zone_details.zone_price')?.value;
+    // zonename.id = this.zone_detail.length;
+    // zonename.network_operator=this.network_details.get('network_operator')?.value;
+    // zonename.zone_name = this.network_details.get('zone_details.zone_name')?.value;
+    // zonename.zone_price = this.network_details.get('zone_details.zone_price')?.value;
 
-    this.zone_detail.push(zonename);
-    console.warn(this.zone_detail);
+    this.zone_detail.push(this.network_details.value);
+    // console.warn(this.zone_detail);
     
     this.behav.changeValue(this.zone_detail);
     this.network_details.reset();

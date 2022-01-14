@@ -61,22 +61,21 @@
         </thead>
         <tbody class="mt-2">
           <tr
-            class="border-bottom"
+            class="border-bottom sortable"
             *ngFor="let row of data; let indexrow = index"
           >
-            <td *ngFor="let val of row; let indexcol = index">
+            <td *ngFor="let val of row | keyvalue; let indexcol = index">
               <input
                 type="text"
                 class="rounded-pill"
-                [value]="val"
-             
+                [value]=val.value
                 [ngClass]="{
                   highlight:
-                    ( col1===(indexcol) && (row1.includes(indexrow) ||cvalue.includes(indexrow)))||(col4===indexcol && row4.includes(indexrow))
+                    ( col4===(indexcol) && (row1.includes(indexrow) ||cvalue.includes(indexrow)))||(col5===indexcol && inc.includes(indexrow))
                 }"
-
                 (blur)="getData($event, indexrow, indexcol)"
               />
+              <!--  -->
               <!-- <span *ngIf="validnum">{{blur}}{{focus}}</span> -->
             </td>
 

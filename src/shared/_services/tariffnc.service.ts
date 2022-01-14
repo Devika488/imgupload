@@ -50,7 +50,7 @@ export class TariffncService {
     let arry: any[] = [];
     let index: any[] = [];
     this.behav._behavalue.value.forEach((item: any, index: any) => {
-      arry.push([item[3]]);
+      arry.push([item['4network_code']]);
     });
     const count = (item: any) =>
       arry.reduce((a, b) => ({ ...a, [b]: (a[b] || 0) + 1 }), {});
@@ -75,8 +75,9 @@ export class TariffncService {
     let arry: any[] = [];
     let index: any[] = [];
     this.behav._behavalue.value.forEach((item: any, index: any) => {
-      arry.push([item[3]]);
+      arry.push([item['4network_code']]);
     });
+    
     // arry.filter(item => {
       arry.reduce((a, e, i) => {
         if (!Number(e)) {
@@ -85,7 +86,6 @@ export class TariffncService {
           index.push(i);
         }
       }, 0);
-      // console.warn("index: "+index);
   return index;
   
     // })

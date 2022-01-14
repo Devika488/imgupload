@@ -22,13 +22,20 @@ export class TariffComponent implements OnInit {
   ) {}
 
   filename: string = '';
-  row4:number[]=[];
-  col4:number=0;
-  col1: number = 0;
-  row1: number[] = [];
-  cvalue: number[] = [];
+  inc: number[] = [];
+  col5: number = 0;
+  col4: number = 0;
+  row1: number[] = []; //network code type invalid row
+  cvalue: number[] = []; //network code redundant invalid row
   data: AOA = [[], []];
   invsheet: boolean = false;
+  thead = [
+    '1zone',
+    '2country',
+    '3network_operator',
+    '4network_code',
+    '5increment_type',
+  ];
 
   ngOnInit(): void {}
   onImageChange(event: any) {
@@ -54,7 +61,7 @@ export class TariffComponent implements OnInit {
 
         this.data = <AOA>XLSX.utils.sheet_to_json(ws, {
           blankrows: false,
-          header: 1,
+          header: this.thead,
           range: 1,
         });
         if (this.data.length === 0) {
@@ -68,11 +75,12 @@ export class TariffComponent implements OnInit {
           this.row1 = this.tarsergetdata.tofindisnumber();
           this.cvalue = this.tarsergetdata.toFindDuplicates();
           if (this.cvalue || this.row1) {
-            this.col1 = 3;
+            this.col4 = 3;
           }
-          this.row4=this.dup.tofindincvalue();
-          if(this.row4!=[])
-            this.col4=4;
+          this.inc = this.dup.tofindincvalue();
+          if (this.inc != []) {
+            this.col5 = 4;
+          }
           // this.behav._behavalue.value.forEach((item: any, index: any) => {
           //   console.warn(item[3], index);
           // });
@@ -104,23 +112,46 @@ export class TariffComponent implements OnInit {
   }
 
   getData(event: any, row: any, col: any) {
-    const prev=this.behav._behavalue.value[row][col];
-    this.behav._behavalue.value[row][col]=event.target.value;
-    console.warn(this.behav._behavalue.getValue());
-  
-    if (col == 3) {
+    switch (col) {
+      case 0: {
+        col = '1zone';
+        break;
+      }
+      case 1: {
+        col = '2country';
+        break;
+      }
+      case 2: {
+        col = '3network_operator';
+        break;
+      }
+      case 3: {
+        col = '4network_code';
+        break;
+      }
+      case 4: {
+        col = '5increment_type';
+        break;
+      }
+      default: {
+        console.warn('invalid key');
+        break;
+      }
+    }
+
+    this.behav._behavalue.value[row][col] = event.target.value;
+    if (col == '4network_code') {
       this.row1 = this.tarsergetdata.tofindisnumber();
       this.cvalue = this.tarsergetdata.toFindDuplicates();
-      this.col1=3;
+      this.col4 = 3;
     }
-      if(this.row1.includes(row)){
-        this.behav._behavalue.value[row][col]=prev;
-
-      }
-      if(col==4){
-        this.row4=this.dup.tofindincvalue();
-          this.col4=4;
-      }
+    if (this.row1.includes(row)) {
+      // this.behav._behavalue.value[row][col] = prev;
+    }
+    if (col == '5increment_type') {
+      this.inc = this.dup.tofindincvalue();
+      this.col5 = 4;
+    }
   }
 
   cancel() {
