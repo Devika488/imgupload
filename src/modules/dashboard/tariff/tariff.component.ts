@@ -63,6 +63,10 @@ export class TariffComponent implements OnInit {
           // this.dup.finddup(this.data);
           
           this.behav.changeValue(this.data);
+          this.cvalue=this.tarsergetdata.toFindDuplicates();
+          if(this.cvalue){
+            this.col1=3;
+          }
           // this.behav._behavalue.value.forEach((item: any, index: any) => {
           //   console.warn(item[3], index);
           // });
