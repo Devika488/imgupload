@@ -152,6 +152,8 @@ export class TariffComponent implements OnInit {
       this.inc = this.dup.tofindincvalue();
       this.col5 = 4;
     }
+    console.warn(this.behav._behavalue.getValue());
+    
   }
 
   cancel() {
@@ -162,8 +164,9 @@ export class TariffComponent implements OnInit {
   }
 
   addrow() {
-    let newRow: any = [null, null, null, null, null];
+    let newRow: any = { '1zone':null,'2country': null,'3network_operator': null, '4network_code':null,'5increment_type': null};
 
     this.data.unshift(newRow);
+    this.behav.changeValue(this.data);
   }
 }
