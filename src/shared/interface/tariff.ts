@@ -1,7 +1,7 @@
 export interface tariff{
   zone: string;
   country: string;
-  networkopr: string;
-  networkcode: number;
+  network_operator: string;
+  network_code: number;
   increment: string;
 }

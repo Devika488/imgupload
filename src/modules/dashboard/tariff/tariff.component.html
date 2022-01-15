@@ -71,7 +71,7 @@
                 [value]=val.value
                 [ngClass]="{
                   highlight:
-                    ( col4===(indexcol) && (row1.includes(indexrow) ||cvalue.includes(indexrow)))||(col5===indexcol && inc.includes(indexrow))
+                  (col1===indexcol && zoneindex.includes(val.value))||( col4===(indexcol) && (row1.includes(indexrow) ||cvalue.includes(indexrow)))||(col5===indexcol && inc.includes(indexrow))
                 }"
                 (blur)="getData($event, indexrow, indexcol)"
               />

@@ -1,10 +1,10 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { Output, Input } from '@angular/core';
-import { tariff } from 'src/shared/interface/tariff';
 import { InputdupService } from 'src/shared/_services/inputdup.service';
 import { BehavService } from 'src/shared/_services/behav.service';
 import { TariffncService } from 'src/shared/_services/tariffnc.service';
+import { ZonevalidService } from 'src/shared/_services/zonevalid.service';
 const { read, write, utils } = XLSX;
 type AOA = any[][];
 @Component({
@@ -18,11 +18,14 @@ export class TariffComponent implements OnInit {
   constructor(
     private dup: InputdupService,
     private behav: BehavService,
-    private tarsergetdata: TariffncService
+    private tarsergetdata: TariffncService,
+    private zonevalid: ZonevalidService
   ) {}
 
   filename: string = '';
+  zoneindex:string[]=[];
   inc: number[] = [];
+  col1:number=0;
   col5: number = 0;
   col4: number = 0;
   row1: number[] = []; //network code type invalid row
@@ -72,6 +75,13 @@ export class TariffComponent implements OnInit {
           // this.dup.finddup(this.data);
           // isnumber,isduplicate
           this.behav.changeValue(this.data);
+        this.zonevalid.validzone();
+        this.zoneindex=this.zonevalid._zonevalidvalue.getValue();
+          // console.warn(this.zoneindex);
+          
+          if(this.zoneindex){
+            this.col1 = 0;
+          }
           this.row1 = this.tarsergetdata.tofindisnumber();
           this.cvalue = this.tarsergetdata.toFindDuplicates();
           if (this.cvalue || this.row1) {
@@ -97,7 +107,8 @@ export class TariffComponent implements OnInit {
     this.behav._behavalue.value.forEach((item: any, index: number) => {
       if (index == row) {
         this.data.splice(index, 1);
-        console.warn(this.behav._behavalue.value);
+        this.zonevalid.validzone();
+        // console.warn(this.behav._behavalue.value);
       }
     });
   }
@@ -138,7 +149,14 @@ export class TariffComponent implements OnInit {
         break;
       }
     }
-
+    //zone valid
+    if (col == '1zone') {
+      this.behav._behavalue.value[row][col] = event.target.value;
+      this.zonevalid.validzone();
+      this.zoneindex=this.zonevalid._zonevalidvalue.getValue();
+      this.col1=0;
+    }
+    // number string? && redundant
     this.behav._behavalue.value[row][col] = event.target.value;
     if (col == '4network_code') {
       this.row1 = this.tarsergetdata.tofindisnumber();
@@ -148,23 +166,31 @@ export class TariffComponent implements OnInit {
     if (this.row1.includes(row)) {
       // this.behav._behavalue.value[row][col] = prev;
     }
+
+    // increment kb/mb
     if (col == '5increment_type') {
       this.inc = this.dup.tofindincvalue();
       this.col5 = 4;
     }
     console.warn(this.behav._behavalue.getValue());
-    
   }
 
   cancel() {
     this.data = [];
     this.filename = '';
     this.behav.changeValue(this.data);
+    this.zonevalid.validzone();
     this.childEvent.emit();
   }
 
   addrow() {
-    let newRow: any = { '1zone':null,'2country': null,'3network_operator': null, '4network_code':null,'5increment_type': null};
+    let newRow: any = {
+      '1zone': null,
+      '2country': null,
+      '3network_operator': null,
+      '4network_code': null,
+      '5increment_type': null,
+    };
 
     this.data.unshift(newRow);
     this.behav.changeValue(this.data);

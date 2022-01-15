@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehavService } from './behav.service';
-import { BehaviorSubject } from 'rxjs';
+// import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -70,24 +70,23 @@ export class TariffncService {
     return index;
   }
 
-
-  tofindisnumber(){
+  tofindisnumber() {
     let arry: any[] = [];
     let index: any[] = [];
     this.behav._behavalue.value.forEach((item: any, index: any) => {
       arry.push([item['4network_code']]);
     });
-    
+
     // arry.filter(item => {
-      arry.reduce((a, e, i) => {
-        if (!Number(e)) {
-          console.warn();
-          
-          index.push(i);
-        }
-      }, 0);
-  return index;
-  
+    arry.reduce((a, e, i) => {
+      if (!Number(e)) {
+        console.warn();
+
+        index.push(i);
+      }
+    }, 0);
+    return index;
+
     // })
   }
 }
