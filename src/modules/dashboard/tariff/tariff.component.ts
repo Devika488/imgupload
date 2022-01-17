@@ -40,7 +40,12 @@ export class TariffComponent implements OnInit {
     '5increment_type',
   ];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.zonevalid._zonevalidvalue$.subscribe((res)=>{
+      this.zoneindex=this.zonevalid._zonevalidvalue.getValue();
+
+    });
+  }
   onImageChange(event: any) {
     if (event.target.files.length !== 1)
       throw new Error('Cannot use multiple files');
@@ -115,10 +120,7 @@ export class TariffComponent implements OnInit {
 
   export(): void {
     if (confirm('Are you Sure ?')) {
-      console.warn(
-        JSON.stringify(this.zonearray),
-        this.behav._behavalue.getValue()
-      );
+      this.dup.isanyemptyfield();
     }
   }
 
@@ -151,6 +153,7 @@ export class TariffComponent implements OnInit {
     }
     //zone valid
     if (col == '1zone') {
+      // make this 4 lines a function and call from zone valid
       this.behav._behavalue.value[row][col] = event.target.value;
       this.zonevalid.validzone();
       this.zoneindex=this.zonevalid._zonevalidvalue.getValue();
@@ -163,9 +166,9 @@ export class TariffComponent implements OnInit {
       this.cvalue = this.tarsergetdata.toFindDuplicates();
       this.col4 = 3;
     }
-    if (this.row1.includes(row)) {
-      // this.behav._behavalue.value[row][col] = prev;
-    }
+    // if (this.row1.includes(row)) {
+    //   // this.behav._behavalue.value[row][col] = prev;
+    // }
 
     // increment kb/mb
     if (col == '5increment_type') {

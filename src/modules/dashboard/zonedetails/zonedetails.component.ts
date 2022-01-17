@@ -11,6 +11,7 @@ import { ZonevalidService } from 'src/shared/_services/zonevalid.service';
 })
 export class ZonedetailsComponent implements OnInit {
   zone_detail: any[] = [];
+  
 
   constructor(
     private fb: FormBuilder,
@@ -18,8 +19,8 @@ export class ZonedetailsComponent implements OnInit {
     private valid: ZonevalidService,
     private tariff:BehavService
   ) {}
-
   ngOnInit(): void {}
+
   network_details: FormGroup = this.fb.group({
     id: ['', Validators.required],
     network_operator: [''],
@@ -37,6 +38,7 @@ export class ZonedetailsComponent implements OnInit {
       ],
     }),
   });
+  
   add() {
     this.network_details.patchValue({
       id: this.zone_detail.length,
@@ -46,11 +48,7 @@ export class ZonedetailsComponent implements OnInit {
 
     this.behav.changeValue(this.zone_detail);
     this.valid.validzone();
-    // let name:string[]=[];
-    // this.zone_detail.filter(item=>{name.push(item.zone_details.zone_name)
-    // console.warn(name);
-    // })
-
+  
     this.network_details.reset();
   }
 
@@ -67,4 +65,5 @@ export class ZonedetailsComponent implements OnInit {
     this.zone_detail = [];
     this.behav.changeValue(this.zone_detail);
   }
+  
 }

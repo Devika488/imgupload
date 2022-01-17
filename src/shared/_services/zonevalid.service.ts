@@ -13,10 +13,6 @@ export class ZonevalidService {
     private zonebehav: ZonebehavService,
     private tariff: BehavService
   ) {}
-  // changeValue(zone: any) {
-  //   // this._zonevalidvalue.next(zone);
-  //   // console.warn("beh : "+JSON.stringify(this._zonebehavalue.value));
-  // }
 
   validzone() {
     let arry: any[] = [];
@@ -34,19 +30,11 @@ export class ZonevalidService {
   
  const index=arry.filter(x => !zonearr.includes(x)
  );
-//  index.filter(
-//   (
-//     item //getting index of redundant values
-//   ) =>
-//     arry.reduce((a, e, i) => {
-//       if (e == item) {
-//         console.warn(e,item);
-        
-//         zoneindex.push(i);
-//       }
-//     }, 0)
-// );
-console.warn("zone not present elements"+index);
-this._zonevalidvalue.next(index);    // console.warn("details "+JSON.stringify(zone),tariff_zone);
+
+this._zonevalidvalue.next(index);    
+  }
+
+  export(){
+
   }
 }
