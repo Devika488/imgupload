@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { isNumber } from '@ng-bootstrap/ng-bootstrap/util/util';
 import { BehavService } from 'src/shared/_services/behav.service';
 import { ZonebehavService } from 'src/shared/_services/zonebehav.service';
 import { ZonevalidService } from 'src/shared/_services/zonevalid.service';
@@ -11,8 +12,9 @@ import { ZonevalidService } from 'src/shared/_services/zonevalid.service';
 })
 export class ZonedetailsComponent implements OnInit {
   zone_detail: any[] = [];
-  
-
+  zonename:boolean=false;//zone name field empty
+  zoneprice:boolean=false;//price empty
+  zonevalid:boolean=false;//both
   constructor(
     private fb: FormBuilder,
     private behav: ZonebehavService,
@@ -22,7 +24,7 @@ export class ZonedetailsComponent implements OnInit {
   ngOnInit(): void {}
 
   network_details: FormGroup = this.fb.group({
-    id: ['', Validators.required],
+    id: [''],
     network_operator: [''],
     zone_details: this.fb.group({
       zone_name: [
@@ -33,23 +35,43 @@ export class ZonedetailsComponent implements OnInit {
         '',
         [
           Validators.required,
-          Validators.pattern(/^[+-]?([1-9]+\.?[0-9]*|\.[0-9]+)$/),
+          Validators.pattern(/^[0-9]*(\.[0-9]*)?$/),
         ],
       ],
     }),
   });
+  checkzonename(){
+    console.warn(this.network_details.get('zone_details.zone_name')?.value=='');
+    
+    this.zonename=this.network_details.get('zone_details.zone_name')?.value==''?false:true;
+  }
+  checkzoneprice(){    
+    
+    this.zoneprice=this.network_details.get('zone_details.zone_price')?.value==''?false:true;
+    console.log(this.network_details.get('zone_details.zone_price')?.value); 
+    
+  }
   
   add() {
-    this.network_details.patchValue({
-      id: this.zone_detail.length,
-    });
-
-    this.zone_detail.push(this.network_details.value);
-
-    this.behav.changeValue(this.zone_detail);
-    this.valid.validzone();
+    if(this.network_details?.valid){
+      this.network_details.patchValue({
+        id: this.zone_detail.length,
+      });
   
-    this.network_details.reset();
+      this.zone_detail.push(this.network_details.value);
+  
+      this.behav.changeValue(this.zone_detail);
+      this.valid.validzone();
+    
+      this.network_details.reset();
+    }
+    else if(this.network_details.get('zone_details.zone_name')?.value=='' ||this.network_details.get('zone_details.zone_price')?.value==''){
+      this.zonevalid=true;
+      setTimeout(() => {
+        this.zonevalid=false;
+      }, 1500);
+    }
+   
   }
 
   del(id: number) {

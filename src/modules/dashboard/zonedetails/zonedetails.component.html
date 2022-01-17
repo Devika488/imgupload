@@ -18,23 +18,35 @@
               formControlName="zone_name"
               class="rounded-pill mt-2 ps-4 border border-1"
               type="text"
+              value=""
+              (focus)="checkzonename()"
+              (blur)="checkzonename()"
               placeholder="Enter Zone"
             />
             <div class="price rounded-pill mt-2 ms-md-2 d-flex align-middle">
               <span class="ps-4">$</span>
-              <!-- placeholder="0.00" -->
+             
               <input
                 formControlName="zone_price"
                 class="change"
                 placeholder="0.00"
-                type="number"
+                (focus)="checkzoneprice()"
+                (blur)="checkzoneprice()"
+                type="text"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                value=""
               />
             </div>
             <button type="submit" class="button-43 rounded-pill mt-2 ms-4">
               Add
             </button>
+
           </div>
         </div>
+        <p class="fw-bolder text-wrap text-danger" role="alert" *ngIf="zonevalid">Enter valid Zone and Zone price </p>
+        <p class=" fw-bolder text-wrap text-danger" role="alert" *ngIf="network_details.get('zone_details.zone_name')?.touched && network_details.get('zone_details.zone_name')?.invalid && zonename">Enter valid Zone name. <span class="lead fw-bolder"> eg: Zone number</span> </p>
+        <p class="fw-bolder text-wrap text-danger" role="alert" *ngIf="network_details.get('zone_details.zone_price')?.touched && network_details.get('zone_details.zone_price')?.invalid && zoneprice">Enter valid Zone price </p>
+
       </form>
     </div>
   </div>
