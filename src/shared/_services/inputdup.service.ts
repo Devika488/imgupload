@@ -6,7 +6,10 @@ import { ZonebehavService } from './zonebehav.service';
   providedIn: 'root',
 })
 export class InputdupService {
-  constructor(private behav: BehavService,private zonebehav:ZonebehavService) {}
+  constructor(
+    private behav: BehavService,
+    private zonebehav: ZonebehavService
+  ) {}
   // checking zone values and inc
 
   tofindincvalue() {
@@ -28,12 +31,13 @@ export class InputdupService {
     return index;
   }
 
-// checking any empty field
-isanyemptyfield(){
-  const zone = [{"Network_Details ":this.zonebehav._zonebehavalue.getValue()}];
-  const tariff=[{"Tariff ":this.behav._behavalue.getValue()}];
-  const obj=[...zone,...tariff];
-   console.log("zone"+JSON.stringify(obj));
-  
-}
+  // checking any empty field
+  export() {
+    const zone = [
+      { 'Network_Details ': this.zonebehav._zonebehavalue.getValue() },
+    ];
+    const tariff = [{ 'Tariff ': this.behav._behavalue.getValue() }];
+    const obj = [...zone, ...tariff];
+    console.log('zone' + JSON.stringify(obj));
+  }
 }

@@ -8,8 +8,6 @@ import { BehavService } from './behav.service';
 // to find the current inputing network code isnumber and isredundant
 export class TariffncService {
   constructor(private behav: BehavService) {}
-  
-  
 
   // finfing redundant values
   toFindDuplicates() {
@@ -43,7 +41,6 @@ export class TariffncService {
       arry.push([item['4network_code']]);
     });
 
-    // arry.filter(item => {
     arry.reduce((a, e, i) => {
       if (!Number(e)) {
         console.warn();
@@ -52,6 +49,5 @@ export class TariffncService {
       }
     }, 0);
     return index;
-
   }
 }

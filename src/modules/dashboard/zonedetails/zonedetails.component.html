@@ -25,7 +25,7 @@
             />
             <div class="price rounded-pill mt-2 ms-md-2 d-flex align-middle">
               <span class="ps-4">$</span>
-             
+
               <input
                 formControlName="zone_price"
                 class="change"
@@ -40,13 +40,38 @@
             <button type="submit" class="button-43 rounded-pill mt-2 ms-4">
               Add
             </button>
-
           </div>
         </div>
-        <p class="fw-bolder text-wrap text-danger" role="alert" *ngIf="zonevalid">Enter valid Zone and Zone price </p>
-        <p class=" fw-bolder text-wrap text-danger" role="alert" *ngIf="network_details.get('zone_details.zone_name')?.touched && network_details.get('zone_details.zone_name')?.invalid && zonename">Enter valid Zone name. <span class="lead fw-bolder"> eg: Zone number</span> </p>
-        <p class="fw-bolder text-wrap text-danger" role="alert" *ngIf="network_details.get('zone_details.zone_price')?.touched && network_details.get('zone_details.zone_price')?.invalid && zoneprice">Enter valid Zone price </p>
-
+        <p
+          class="fw-bolder text-wrap text-danger"
+          role="alert"
+          *ngIf="zonevalid"
+        >
+          Enter valid Zone and Zone price
+        </p>
+        <p
+          class="fw-bolder text-wrap text-danger"
+          role="alert"
+          *ngIf="
+            network_details.get('zone_details.zone_name')?.touched &&
+            network_details.get('zone_details.zone_name')?.invalid &&
+            zonename
+          "
+        >
+          Enter valid Zone name.
+          <span class="lead fw-bolder"> eg: Zone number</span>
+        </p>
+        <p
+          class="fw-bolder text-wrap text-danger"
+          role="alert"
+          *ngIf="
+            network_details.get('zone_details.zone_price')?.touched &&
+            network_details.get('zone_details.zone_price')?.invalid &&
+            zoneprice
+          "
+        >
+          Enter valid Zone price
+        </p>
       </form>
     </div>
   </div>
@@ -83,8 +108,4 @@
     </div>
   </div>
 </div>
-<app-tariff
-  (childEvent)="arrayclear()"
-  [zonearray]="zone_detail"
-  
-></app-tariff>
+<app-tariff (childEvent)="arrayclear()" [zonearray]="zone_detail"></app-tariff>

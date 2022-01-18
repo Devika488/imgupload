@@ -51,12 +51,12 @@
       <table class="mb-5">
         <thead class="mt-2">
           <tr class="">
-            <th  class="p-2">Zone</th>
-            <th >Country</th>
-            <th >Network Operator</th>
-            <th >Network Code</th>
-            <th >Increment</th>
-            <th ></th>
+            <th class="p-2">Zone</th>
+            <th>Country</th>
+            <th>Network Operator</th>
+            <th>Network Code</th>
+            <th>Increment</th>
+            <th></th>
           </tr>
         </thead>
         <tbody class="mt-2">
@@ -68,15 +68,17 @@
               <input
                 type="text"
                 class="rounded-pill inputclass"
-                [value]=val.value
+                [value]="val.value"
                 [ngClass]="{
                   highlight:
-                  (col1===indexcol && zoneindex.includes(val.value))||( col4===(indexcol) && (row1.includes(indexrow) ||cvalue.includes(indexrow)))||(col5===indexcol && inc.includes(indexrow))
+                    (col1 === indexcol && zoneindex.includes(val.value)) ||
+                    (col4 === indexcol &&
+                      (row1.includes(indexrow) || cvalue.includes(indexrow))) ||
+                    (col5 === indexcol && inc.includes(indexrow))
                 }"
+                (focus)="getData($event, indexrow, indexcol)"
                 (blur)="getData($event, indexrow, indexcol)"
               />
-              <!--  -->
-              <!-- <span *ngIf="validnum">{{blur}}{{focus}}</span> -->
             </td>
 
             <td class="align-middle">

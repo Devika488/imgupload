@@ -9,6 +9,5 @@ export class ZonebehavService {
   constructor() {}
   changeValue(arr: any) {
     this._zonebehavalue.next(arr);
-    // console.warn("beh : "+JSON.stringify(this._zonebehavalue.value));
   }
 }

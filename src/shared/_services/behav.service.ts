@@ -2,18 +2,14 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BehavService {
-
-  constructor() { }
+  constructor() {}
   public _behavalue = new BehaviorSubject<any>([]);
   behavalue$ = this._behavalue.asObservable();
 
-  changeValue(arr:any) {
+  changeValue(arr: any) {
     this._behavalue.next(arr);
-    // console.warn("beh : "+JSON.stringify(this._behavalue.value));
-    
   }
-  
 }

@@ -17,5 +17,4 @@ export class ErrServicesService {
   set message(val: string) {
     this._message = JSON.stringify(val);
   }
-
 }

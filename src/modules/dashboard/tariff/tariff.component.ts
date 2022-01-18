@@ -23,9 +23,9 @@ export class TariffComponent implements OnInit {
   ) {}
 
   filename: string = '';
-  zoneindex:string[]=[];
+  zoneindex: string[] = [];
   inc: number[] = [];
-  col1:number=0;
+  col1: number = 0;
   col5: number = 0;
   col4: number = 0;
   row1: number[] = []; //network code type invalid row
@@ -41,9 +41,8 @@ export class TariffComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.zonevalid._zonevalidvalue$.subscribe((res)=>{
-      this.zoneindex=this.zonevalid._zonevalidvalue.getValue();
-
+    this.zonevalid._zonevalidvalue$.subscribe((res) => {
+      this.zoneindex = this.zonevalid._zonevalidvalue.getValue();
     });
   }
   onImageChange(event: any) {
@@ -80,11 +79,10 @@ export class TariffComponent implements OnInit {
           // this.dup.finddup(this.data);
           // isnumber,isduplicate
           this.behav.changeValue(this.data);
-        this.zonevalid.validzone();
-        this.zoneindex=this.zonevalid._zonevalidvalue.getValue();
-          // console.warn(this.zoneindex);
-          
-          if(this.zoneindex){
+          this.zonevalid.validzone();
+          this.zoneindex = this.zonevalid._zonevalidvalue.getValue();
+
+          if (this.zoneindex) {
             this.col1 = 0;
           }
           this.row1 = this.tarsergetdata.tofindisnumber();
@@ -96,9 +94,6 @@ export class TariffComponent implements OnInit {
           if (this.inc != []) {
             this.col5 = 4;
           }
-          // this.behav._behavalue.value.forEach((item: any, index: any) => {
-          //   console.warn(item[3], index);
-          // });
         }
       };
       reader.readAsBinaryString(event.target.files[0]);
@@ -113,14 +108,13 @@ export class TariffComponent implements OnInit {
       if (index == row) {
         this.data.splice(index, 1);
         this.zonevalid.validzone();
-        // console.warn(this.behav._behavalue.value);
       }
     });
   }
 
   export(): void {
     if (confirm('Are you Sure ?')) {
-      this.dup.isanyemptyfield();
+      this.dup.export();
     }
   }
 
@@ -156,8 +150,8 @@ export class TariffComponent implements OnInit {
       // make this 4 lines a function and call from zone valid
       this.behav._behavalue.value[row][col] = event.target.value;
       this.zonevalid.validzone();
-      this.zoneindex=this.zonevalid._zonevalidvalue.getValue();
-      this.col1=0;
+      this.zoneindex = this.zonevalid._zonevalidvalue.getValue();
+      this.col1 = 0;
     }
     // number string? && redundant
     this.behav._behavalue.value[row][col] = event.target.value;
@@ -175,7 +169,6 @@ export class TariffComponent implements OnInit {
       this.inc = this.dup.tofindincvalue();
       this.col5 = 4;
     }
-    console.warn(this.behav._behavalue.getValue());
   }
 
   cancel() {
