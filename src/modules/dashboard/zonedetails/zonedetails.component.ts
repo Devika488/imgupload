@@ -15,6 +15,7 @@ export class ZonedetailsComponent implements OnInit {
   zonename: boolean = false; //zone name field empty
   zoneprice: boolean = false; //price empty
   zonevalid: boolean = false; //both
+  zoneduplicate:boolean=false;//zone value exist
   constructor(
     private fb: FormBuilder,
     private behav: ZonebehavService,
@@ -29,11 +30,11 @@ export class ZonedetailsComponent implements OnInit {
     zone_details: this.fb.group({
       zone_name: [
         '',
-        [Validators.required, Validators.pattern(/^(Zone)+\s[1-9]+$/)],
+        [Validators.required, Validators.pattern(/^(Zone)+\s[0-9]+$/)],
       ],
       zone_price: [
         '',
-        [Validators.required, Validators.pattern(/^[0-9]*(\.[0-9]*)?$/)],
+        [Validators.required, Validators.pattern(/^[1-9][0-9]*(\.[0-9]*)?$/)],
       ],
     }),
   });
@@ -51,17 +52,35 @@ export class ZonedetailsComponent implements OnInit {
   }
 
   add() {
+    let zoneneme: string[] = [];
+    let x = 0;
+    const val = this.network_details.get('zone_details.zone_name')?.value;
     if (this.network_details?.valid) {
       this.network_details.patchValue({
         id: this.zone_detail.length,
       });
 
-      this.zone_detail.push(this.network_details.value);
-
-      this.behav.changeValue(this.zone_detail);
-      this.valid.validzone();
-
-      this.network_details.reset();
+      if (this.zone_detail.length != 0) {
+        this.zone_detail.forEach((item) => {
+          zoneneme.push(item['zone_details'].zone_name);
+        });
+        zoneneme.some((item) =>{
+          if (item == val) {
+            x = 1;
+            this.zoneduplicate=true;
+           setTimeout(() => {
+            this.zoneduplicate=false;
+           }, 1500);
+            //  return true;
+          }
+         
+        });
+        if (x == 0) {
+          this.adding();
+        }
+      } else {
+        this.adding();
+      }
     } else if (
       this.network_details.get('zone_details.zone_name')?.value == '' ||
       this.network_details.get('zone_details.zone_price')?.value == ''
@@ -71,6 +90,14 @@ export class ZonedetailsComponent implements OnInit {
         this.zonevalid = false;
       }, 1500);
     }
+  }
+  adding() {
+    this.zone_detail.push(this.network_details.value);
+
+    this.behav.changeValue(this.zone_detail);
+    this.valid.validzone();
+
+    this.network_details.reset();
   }
 
   del(id: number) {

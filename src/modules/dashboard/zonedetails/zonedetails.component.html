@@ -61,6 +61,7 @@
           Enter valid Zone name.
           <span class="lead fw-bolder"> eg: Zone number</span>
         </p>
+     
         <p
           class="fw-bolder text-wrap text-danger"
           role="alert"
@@ -72,6 +73,15 @@
         >
           Enter valid Zone price
         </p>
+        <p
+        class="fw-bolder text-wrap text-danger"
+        role="alert"
+        *ngIf="
+        zoneduplicate
+        "
+      >
+        You've already entered that zone
+      </p>
       </form>
     </div>
   </div>
