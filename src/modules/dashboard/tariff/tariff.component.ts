@@ -76,24 +76,9 @@ export class TariffComponent implements OnInit {
           this.data = [];
           alert('Please upload a valid excel sheet');
         } else {
-          // this.dup.finddup(this.data);
           // isnumber,isduplicate
           this.behav.changeValue(this.data);
-          this.zonevalid.validzone();
-          this.zoneindex = this.zonevalid._zonevalidvalue.getValue();
-
-          if (this.zoneindex) {
-            this.col1 = 0;
-          }
-          this.row1 = this.tarsergetdata.tofindisnumber();
-          this.cvalue = this.tarsergetdata.toFindDuplicates();
-          if (this.cvalue || this.row1) {
-            this.col4 = 3;
-          }
-          this.inc = this.dup.tofindincvalue();
-          if (this.inc != []) {
-            this.col5 = 4;
-          }
+          this.valid();
         }
       };
       reader.readAsBinaryString(event.target.files[0]);
@@ -107,7 +92,7 @@ export class TariffComponent implements OnInit {
     this.behav._behavalue.value.forEach((item: any, index: number) => {
       if (index == row) {
         this.data.splice(index, 1);
-        this.zonevalid.validzone();
+       this.valid();
       }
     });
   }
@@ -190,5 +175,23 @@ export class TariffComponent implements OnInit {
 
     this.data.unshift(newRow);
     this.behav.changeValue(this.data);
+   this.valid();
+  }
+  valid(){
+    this.zonevalid.validzone();
+    this.zoneindex = this.zonevalid._zonevalidvalue.getValue();
+
+    if (this.zoneindex) {
+      this.col1 = 0;
+    }
+    this.row1 = this.tarsergetdata.tofindisnumber();
+    this.cvalue = this.tarsergetdata.toFindDuplicates();
+    if (this.cvalue || this.row1) {
+      this.col4 = 3;
+    }
+    this.inc = this.dup.tofindincvalue();
+    if (this.inc != []) {
+      this.col5 = 4;
+    }
   }
 }

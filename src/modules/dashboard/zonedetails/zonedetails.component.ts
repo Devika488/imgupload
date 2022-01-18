@@ -70,7 +70,7 @@ export class ZonedetailsComponent implements OnInit {
             this.zoneduplicate=true;
            setTimeout(() => {
             this.zoneduplicate=false;
-           }, 1500);
+           }, 2000);
             //  return true;
           }
          
@@ -88,7 +88,7 @@ export class ZonedetailsComponent implements OnInit {
       this.zonevalid = true;
       setTimeout(() => {
         this.zonevalid = false;
-      }, 1500);
+      }, 2000);
     }
   }
   adding() {

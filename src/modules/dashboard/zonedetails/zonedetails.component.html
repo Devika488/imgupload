@@ -97,15 +97,15 @@
         </thead>
         <tbody>
           <tr class="border-bottom" *ngFor="let det of zone_detail">
-            <td class="">
+            <td class="p-2">
               <span class="ms-2">{{ det.zone_details.zone_name }}</span>
             </td>
-            <td class="">
-              <span class="ms-2">{{
+            <td class="p-2">
+              <span class="ms-2">${{
                 det.zone_details.zone_price | number: ".1-2"
               }}</span>
             </td>
-            <td class="align-middle">
+            <td class="align-middle p-2">
               <a class="delete-icon" (click)="del(this.det.id)">
                 <img
                   src="https://img.icons8.com/material-sharp/24/000000/filled-trash.png"
