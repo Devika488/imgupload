@@ -15,7 +15,7 @@ export class ZonedetailsComponent implements OnInit {
   zonename: boolean = false; //zone name field empty
   zoneprice: boolean = false; //price empty
   zonevalid: boolean = false; //both
-  zoneduplicate:boolean=false;//zone value exist
+  zoneduplicate: boolean = false; //zone value exist
   constructor(
     private fb: FormBuilder,
     private behav: ZonebehavService,
@@ -25,7 +25,7 @@ export class ZonedetailsComponent implements OnInit {
   ngOnInit(): void {}
 
   network_details: FormGroup = this.fb.group({
-    id: [''],
+    // id: [''],
     network_operator: [''],
     zone_details: this.fb.group({
       zone_name: [
@@ -56,24 +56,18 @@ export class ZonedetailsComponent implements OnInit {
     let x = 0;
     const val = this.network_details.get('zone_details.zone_name')?.value;
     if (this.network_details?.valid) {
-      this.network_details.patchValue({
-        id: this.zone_detail.length,
-      });
-
       if (this.zone_detail.length != 0) {
         this.zone_detail.forEach((item) => {
           zoneneme.push(item['zone_details'].zone_name);
         });
-        zoneneme.some((item) =>{
+        zoneneme.some((item) => {
           if (item == val) {
             x = 1;
-            this.zoneduplicate=true;
-           setTimeout(() => {
-            this.zoneduplicate=false;
-           }, 2000);
-            //  return true;
+            this.zoneduplicate = true;
+            setTimeout(() => {
+              this.zoneduplicate = false;
+            }, 2000);
           }
-         
         });
         if (x == 0) {
           this.adding();
@@ -100,9 +94,9 @@ export class ZonedetailsComponent implements OnInit {
     this.network_details.reset();
   }
 
-  del(id: number) {
+  del(zone: any) {
     this.zone_detail.forEach((item, index) => {
-      if (item.id == id) {
+      if (item['zone_details'].zone_name == zone) {
         this.zone_detail.splice(index, 1);
       }
     });

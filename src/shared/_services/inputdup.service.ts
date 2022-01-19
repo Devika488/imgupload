@@ -14,7 +14,10 @@ export class InputdupService {
   tofindemptyopr() {
     let arry: any[] = [];
     this.behav._behavalue.value.forEach((item: any, index: any) => {
-      if (item['3network_operator']===null||item['3network_operator']==="") {        
+      if (
+        item['3network_operator'] === null ||
+        item['3network_operator'] === ''
+      ) {
         arry.push(index);
       }
     });
@@ -24,14 +27,10 @@ export class InputdupService {
   tofindemptycount() {
     let arry: any[] = [];
     this.behav._behavalue.value.forEach((item: any, index: any) => {
-      if (item['2country']===null||item['2country']==="") {        
+      if (item['2country'] === null || item['2country'] === '') {
         arry.push(index);
       }
-     
     });
-
-    // arry = arry.filter((x) => x == '');
-    // console.warn('index:' + arry);
 
     return arry;
   }

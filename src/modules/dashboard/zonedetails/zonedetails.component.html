@@ -41,6 +41,9 @@
               Add
             </button>
           </div>
+         <p class="text-danger">* <span class="lead text-muted fs-6 fw-bolder"> Format: Zone number</span>
+          <br>
+          <span class="text-muted">Eg: Zone 1,Zone 2,..</span></p>
         </div>
         <p
           class="fw-bolder text-wrap text-danger"
@@ -59,9 +62,8 @@
           "
         >
           Enter valid Zone name.
-          <span class="lead fw-bolder"> eg: Zone number</span>
         </p>
-     
+
         <p
           class="fw-bolder text-wrap text-danger"
           role="alert"
@@ -74,14 +76,12 @@
           Enter valid Zone price
         </p>
         <p
-        class="fw-bolder text-wrap text-danger"
-        role="alert"
-        *ngIf="
-        zoneduplicate
-        "
-      >
-        You've already entered that zone
-      </p>
+          class="fw-bolder text-wrap text-danger"
+          role="alert"
+          *ngIf="zoneduplicate"
+        >
+          You've already entered that zone
+        </p>
       </form>
     </div>
   </div>
@@ -101,12 +101,12 @@
               <span class="ms-2">{{ det.zone_details.zone_name }}</span>
             </td>
             <td class="p-2">
-              <span class="ms-2">${{
-                det.zone_details.zone_price | number: ".1-2"
-              }}</span>
+              <span class="ms-2"
+                >${{ det.zone_details.zone_price | number: ".1-2" }}</span
+              >
             </td>
             <td class="align-middle p-2">
-              <a class="delete-icon" (click)="del(this.det.id)">
+              <a class="delete-icon" (click)="del(this.det.zone_details.zone_name)">
                 <img
                   src="https://img.icons8.com/material-sharp/24/000000/filled-trash.png"
                 />

@@ -26,14 +26,14 @@ export class TariffComponent implements OnInit {
   zoneindex: string[] = [];
   inc: number[] = [];
   col1: number = 0;
-  col2:number=0;
-  col3:number=0;
+  col2: number = 0;
+  col3: number = 0;
   col5: number = 0;
   col4: number = 0;
   row1: number[] = []; //network code type invalid row
   cvalue: number[] = []; //network code redundant invalid row
-  opr:number[]=[];
-  country:number[]=[];
+  opr: number[] = [];
+  country: number[] = [];
   data: AOA = [[], []];
   invsheet: boolean = false;
   thead = [
@@ -102,9 +102,31 @@ export class TariffComponent implements OnInit {
   }
 
   export(): void {
+    
+      if(this.zoneindex.length>0){
+        alert("Please check Zone. You've entered invalid zone")
+      }
+      else if(this.country.length>0){
+        alert("Please check Country.You've not enetered all values")
+      }
+      else if(this.opr.length>0){
+        alert("Please check network operator.You've not enetered all values")
+      }
+     else if(this.row1.length>0){
+        alert("Please check network code. One value is not a number");
+      }
+      else if(this.cvalue.length>0){
+        alert("Please check network code.Values are not unique");
+      }
+      else if(this.inc.length>0){
+        alert("Please check increment values.The value should be KB/MB");
+      }
+    
+   else{
     if (confirm('Are you Sure ?')) {
       this.dup.export();
     }
+   }
   }
 
   getData(event: any, row: any, col: any) {
@@ -135,7 +157,7 @@ export class TariffComponent implements OnInit {
       }
     }
     this.behav._behavalue.value[row][col] = event.target.value;
-    
+
     //zone valid
     if (col == '1zone') {
       // make this 4 lines a function and call from zone valid
@@ -157,17 +179,12 @@ export class TariffComponent implements OnInit {
       this.cvalue = this.tarsergetdata.toFindDuplicates();
       this.col4 = 3;
     }
-    // if (this.row1.includes(row)) {
-    //   // this.behav._behavalue.value[row][col] = prev;
-    // }
 
     // increment kb/mb
     if (col == '5increment_type') {
       this.inc = this.dup.tofindincvalue();
       this.col5 = 4;
     }
-   
-
   }
 
   cancel() {
@@ -206,13 +223,13 @@ export class TariffComponent implements OnInit {
     if (this.inc != []) {
       this.col5 = 4;
     }
-    this.opr=this.dup.tofindemptyopr();
-    if(this.opr){
-      this.col3=2;
+    this.opr = this.dup.tofindemptyopr();
+    if (this.opr) {
+      this.col3 = 2;
     }
-    this.country=this.dup.tofindemptycount();
-    if(this.country){
-      this.col2=1;
+    this.country = this.dup.tofindemptycount();
+    if (this.country) {
+      this.col2 = 1;
     }
   }
 }
