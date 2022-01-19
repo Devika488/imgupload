@@ -11,7 +11,30 @@ export class InputdupService {
     private zonebehav: ZonebehavService
   ) {}
   // checking zone values and inc
+  tofindemptyopr() {
+    let arry: any[] = [];
+    this.behav._behavalue.value.forEach((item: any, index: any) => {
+      if (item['3network_operator']===null||item['3network_operator']==="") {        
+        arry.push(index);
+      }
+    });
 
+    return arry;
+  }
+  tofindemptycount() {
+    let arry: any[] = [];
+    this.behav._behavalue.value.forEach((item: any, index: any) => {
+      if (item['2country']===null||item['2country']==="") {        
+        arry.push(index);
+      }
+     
+    });
+
+    // arry = arry.filter((x) => x == '');
+    // console.warn('index:' + arry);
+
+    return arry;
+  }
   tofindincvalue() {
     let arry: any[] = [];
     let index: any[] = [];

@@ -72,6 +72,8 @@
                 [ngClass]="{
                   highlight:
                     (col1 === indexcol && zoneindex.includes(val.value)) ||
+                    (col2 === indexcol && country.includes(indexrow)) ||
+                    (col3 === indexcol && opr.includes(indexrow)) ||
                     (col4 === indexcol &&
                       (row1.includes(indexrow) || cvalue.includes(indexrow))) ||
                     (col5 === indexcol && inc.includes(indexrow))

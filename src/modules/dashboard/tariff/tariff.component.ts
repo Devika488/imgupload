@@ -26,10 +26,14 @@ export class TariffComponent implements OnInit {
   zoneindex: string[] = [];
   inc: number[] = [];
   col1: number = 0;
+  col2:number=0;
+  col3:number=0;
   col5: number = 0;
   col4: number = 0;
   row1: number[] = []; //network code type invalid row
   cvalue: number[] = []; //network code redundant invalid row
+  opr:number[]=[];
+  country:number[]=[];
   data: AOA = [[], []];
   invsheet: boolean = false;
   thead = [
@@ -92,7 +96,7 @@ export class TariffComponent implements OnInit {
     this.behav._behavalue.value.forEach((item: any, index: number) => {
       if (index == row) {
         this.data.splice(index, 1);
-       this.valid();
+        this.valid();
       }
     });
   }
@@ -130,16 +134,24 @@ export class TariffComponent implements OnInit {
         break;
       }
     }
+    this.behav._behavalue.value[row][col] = event.target.value;
+    
     //zone valid
     if (col == '1zone') {
       // make this 4 lines a function and call from zone valid
-      this.behav._behavalue.value[row][col] = event.target.value;
       this.zonevalid.validzone();
       this.zoneindex = this.zonevalid._zonevalidvalue.getValue();
       this.col1 = 0;
     }
+    if (col == '2country') {
+      this.country = this.dup.tofindemptycount();
+      this.col2 = 1;
+    }
+    if (col == '3network_operator') {
+      this.opr = this.dup.tofindemptyopr();
+      this.col3 = 2;
+    }
     // number string? && redundant
-    this.behav._behavalue.value[row][col] = event.target.value;
     if (col == '4network_code') {
       this.row1 = this.tarsergetdata.tofindisnumber();
       this.cvalue = this.tarsergetdata.toFindDuplicates();
@@ -154,6 +166,8 @@ export class TariffComponent implements OnInit {
       this.inc = this.dup.tofindincvalue();
       this.col5 = 4;
     }
+   
+
   }
 
   cancel() {
@@ -175,12 +189,11 @@ export class TariffComponent implements OnInit {
 
     this.data.unshift(newRow);
     this.behav.changeValue(this.data);
-   this.valid();
+    this.valid();
   }
-  valid(){
+  valid() {
     this.zonevalid.validzone();
     this.zoneindex = this.zonevalid._zonevalidvalue.getValue();
-
     if (this.zoneindex) {
       this.col1 = 0;
     }
@@ -192,6 +205,14 @@ export class TariffComponent implements OnInit {
     this.inc = this.dup.tofindincvalue();
     if (this.inc != []) {
       this.col5 = 4;
+    }
+    this.opr=this.dup.tofindemptyopr();
+    if(this.opr){
+      this.col3=2;
+    }
+    this.country=this.dup.tofindemptycount();
+    if(this.country){
+      this.col2=1;
     }
   }
 }
